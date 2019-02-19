@@ -68,19 +68,24 @@ public class AppliedFormElementsContainerBase extends Container {
     var panel:CollapsiblePanel = queryById(FORM_ELEMENT_PANEL) as CollapsiblePanel;
 
     var formElementEditor:FormElement = ReusableComponentsServiceImpl.getInstance().requestComponentForReuse(formElement.getType()) as FormElement;
-    if (formElement != formElementEditor.getFormElementStructWrapper()) {
-      formElementEditor.updateFormElementStructWrapper(formElement);
-      panel.add(formElementEditor as Component);
+    if (formElementEditor) {
+      if (formElement != formElementEditor.getFormElementStructWrapper()) {
+        formElementEditor.updateFormElementStructWrapper(formElement);
+        panel.add(formElementEditor as Component);
+      }
+
+      formElementsManager.getCollapsedElementVE().addChangeListener(collapsedElementChangeListener);
+
+      panel.addEventListener(PanelEvent.EXPAND, function (eventType:PanelEvent):void {
+        formElementsManager.getCollapsedElementVE().setValue(formElement.getId());
+      });
+
+      makeFormElementDraggable();
+      this.panel = panel;
+    } else {
+      trace("[WARN] Unable to find reusable FormElement component for type: " + formElement.getType());
     }
 
-    formElementsManager.getCollapsedElementVE().addChangeListener(collapsedElementChangeListener);
-
-    panel.addEventListener(PanelEvent.EXPAND, function (eventType:PanelEvent):void {
-      formElementsManager.getCollapsedElementVE().setValue(formElement.getId());
-    });
-
-    makeFormElementDraggable();
-    this.panel = panel;
   }
 
   override public function destroy(...params):void {
@@ -91,10 +96,15 @@ public class AppliedFormElementsContainerBase extends Container {
   private function collapsedElementChangeListener(ve:ValueExpression):void {
     if (ve.getValue() == formElement.getId()) {
       var formElementEditor:FormElement = ReusableComponentsServiceImpl.getInstance().requestComponentForReuse(formElement.getType()) as FormElement;
-      if (formElement != formElementEditor.getFormElementStructWrapper()) {
-        formElementEditor.updateFormElementStructWrapper(formElement);
-        panel.add(formElementEditor as Component);
+      if (formElementEditor) {
+        if (formElement != formElementEditor.getFormElementStructWrapper()) {
+          formElementEditor.updateFormElementStructWrapper(formElement);
+          panel.add(formElementEditor as Component);
+        }
+      } else {
+        trace("[WARN] Unable to find reusable FormElement component for type: " + formElement.getType());
       }
+
     }
   }
 

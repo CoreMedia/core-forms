@@ -40,6 +40,7 @@
     </fx:Script>
 
   <local:items>
+
     <Container>
       <items>
         <!-- left column, applicable form elements -->
@@ -49,8 +50,8 @@
             two value expressions 'bindTo' and 'forceReadOnlyValueExpression' to create the read only value expression.
             If a content is checked out by another user, the read only value is not stored in the forceReadOnlyValueExpression.-->
             <local:ApplicableElements formElements="{config.formElements}"
-                                      dragActiveVE="{getDragActiveVE()}"
-                                      readOnlyVE="{PropertyEditorUtil.createReadOnlyValueExpression(config.bindTo, config.forceReadOnlyValueExpression)}"/>
+                                                                              dragActiveVE="{getDragActiveVE()}"
+                                                                              readOnlyVE="{PropertyEditorUtil.createReadOnlyValueExpression(config.bindTo, config.forceReadOnlyValueExpression)}"/>
             <local:ApplicableElementsHelpContainer/>
           </items>
         </Container>

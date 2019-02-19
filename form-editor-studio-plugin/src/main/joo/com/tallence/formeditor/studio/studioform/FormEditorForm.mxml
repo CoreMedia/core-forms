@@ -47,6 +47,7 @@
         <bpforms:ValidityDocumentForm bindTo="{config.bindTo}"/>
       </editor:items>
     </editor:DocumentForm>
+
     <editor:DocumentForm
         title="{resourceManager.getString('com.tallence.formeditor.studio.bundles.FormEditor', 'FormEditor_tab_formData_title')}">
       <editor:items>
@@ -88,7 +89,8 @@
 
       </editor:items>
     </editor:DocumentForm>
-    <formeditor:FormEditorDocumentForm bindTo="{config.bindTo}"
+
+    <formeditor:FormEditorDocumentForm itemId="formEditor" bindTo="{config.bindTo}"
                                        forceReadOnlyValueExpression="{config.forceReadOnlyValueExpression}"
                                        structPropertyName="formData">
         <formeditor:formElements>
@@ -119,8 +121,8 @@
           <elements:RadioButtonsEditor/>
         </formeditor:formElements>
     </formeditor:FormEditorDocumentForm>
+
     <bpforms:MultiLanguageDocumentForm bindTo="{config.bindTo}"/>
-    <media:MetaDataDocumentForm/>
     <editor:DocumentForm title="{resourceManager.getString('com.coremedia.blueprint.studio.BlueprintTabs', 'Tab_system_title')}"
                          itemId="system"
                          autoHide="true">
@@ -145,7 +147,7 @@
         </editor:PropertyFieldGroup>
         <editor:DocumentMetaDataFormDispatcher/>
       </editor:items>
-    
+
     </editor:DocumentForm>
   </editor:items>
 

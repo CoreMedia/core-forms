@@ -41,10 +41,14 @@
 
     <editor:NewContentMenu>
       <editor:plugins>
-        <ui:AddItemsPlugin index="0">
+        <ui:AddItemsPlugin>
           <ui:items>
+            <MenuSeparator/>
             <bpb-components:QuickCreateMenuItem contentType="FormEditor"/>
           </ui:items>
+          <ui:before>
+            <Component itemId="uploadSeparator"/>
+          </ui:before>
         </ui:AddItemsPlugin>
       </editor:plugins>
     </editor:NewContentMenu>

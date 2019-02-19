@@ -26,6 +26,6 @@
             fieldLabel="{resourceManager.getString('com.tallence.formeditor.studio.bundles.FormEditor', 'FormEditor_element_mandatory_label')}"
             propertyName="validator.mandatory"
             defaultValue="false"/>
-        <fields:LinkedContentField propertyName="linkTarget"/>
+        <fields:LinkedContentField propertyName="linkTarget" linkContentType="CMLinkable"/>
   </local:items>
 </local:AbstractFormElement>
