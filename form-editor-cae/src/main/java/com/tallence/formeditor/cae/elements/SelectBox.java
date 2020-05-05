@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Model bean for a configured SelectBox.
  */
-public class SelectBox extends AbstractFormElement<String, SelectBoxValidator> {
+public class SelectBox extends AbstractFormElement<String, SelectBoxValidator> implements FieldWithOptions {
 
   public SelectBox() {
     super(String.class);
@@ -31,6 +31,7 @@ public class SelectBox extends AbstractFormElement<String, SelectBoxValidator> {
 
   private List<ComplexValue> options;
 
+  @Override
   public List<ComplexValue> getOptions() {
     return this.options;
   }

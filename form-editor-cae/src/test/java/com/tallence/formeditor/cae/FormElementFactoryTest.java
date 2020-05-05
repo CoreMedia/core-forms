@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.tallence.formeditor.cae;
 
 import com.coremedia.blueprint.testing.ContentTestHelper;
@@ -30,7 +29,9 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static com.tallence.formeditor.cae.parser.ConsentFormCheckBoxParser.CONSENT_FORM_CHECK_BOX_TYPE;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.*;
 
@@ -104,9 +105,21 @@ public class FormElementFactoryTest {
     assertThat(formElement.getValidationResult().size(), is(1));
 
 
-    assertThat(formElement.getRadioButtons(), notNullValue());
-    assertThat(formElement.getRadioButtons().get(1).isSelectedByDefault(), is(true));
+    assertThat(formElement.getOptions(), notNullValue());
+    assertThat(formElement.getOptions().get(1).isSelectedByDefault(), is(true));
 
+  }
+
+  @Test
+  public void testDependentFields() {
+    TextField formElement = getTestFormElement("DependentField");
+
+    assertEquals("myComplexCustomId", formElement.getAdvancedSettings().getCustomId());
+    assertEquals(Integer.valueOf(3), formElement.getAdvancedSettings().getColumnWidth());
+    assertEquals(true, formElement.getAdvancedSettings().isBreakAfterElement());
+    assertEquals("RadioButtonsOptional", formElement.getAdvancedSettings().getDependentElementId());
+    assertEquals("123", formElement.getAdvancedSettings().getDependentElementValue());
+    assertEquals(true, formElement.getAdvancedSettings().isVisibilityDependent());
   }
 
   @Test
@@ -138,8 +151,8 @@ public class FormElementFactoryTest {
     formElement.setValue(Collections.emptyList());
     assertThat(formElement.getValidationResult().size(), is(1));
 
-    assertThat(formElement.getCheckBoxes(), notNullValue());
-    assertThat(formElement.getCheckBoxes().get(1).isSelectedByDefault(), is(true));
+    assertThat(formElement.getOptions(), notNullValue());
+    assertThat(formElement.getOptions().get(1).isSelectedByDefault(), is(true));
 
   }
 

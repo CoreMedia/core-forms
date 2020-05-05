@@ -24,7 +24,9 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.coremedia.blueprint.base.util.StructUtil.*;
 import static com.tallence.formeditor.cae.FormElementFactory.FORM_DATA_KEY_TYPE;
+import static java.util.Optional.ofNullable;
 
 /**
  * Parser for elements of type {@link TextField} and some subTypes, e.g ZipField.
@@ -33,11 +35,11 @@ import static com.tallence.formeditor.cae.FormElementFactory.FORM_DATA_KEY_TYPE;
 @Component
 public class TextFieldParser extends AbstractFormElementParser<TextField> {
 
-  private static final String KEY_TEXT_FIELD = "TextField";
-  private static final String KEY_ZIP_FIELD = "ZipField";
-  private static final String KEY_PHONE_FIELD = "PhoneField";
-  private static final String KEY_FAX_FIELD = "FaxField";
-  private static final String KEY_STREET_NUMBER_FIELD = "StreetNumberField";
+  public static final String KEY_TEXT_FIELD = "TextField";
+  public static final String KEY_ZIP_FIELD = "ZipField";
+  public static final String KEY_PHONE_FIELD = "PhoneField";
+  public static final String KEY_FAX_FIELD = "FaxField";
+  public static final String KEY_STREET_NUMBER_FIELD = "StreetNumberField";
 
 
   @Override
@@ -62,13 +64,13 @@ public class TextFieldParser extends AbstractFormElementParser<TextField> {
 
   @Override
   public void parseSpecialFields(TextField formElement, Struct elementData) {
-    doForStructElement(elementData, FORM_DATA_VALIDATOR, validator -> {
+    ofNullable(getSubstruct(elementData, FORM_DATA_VALIDATOR)).ifPresent(validator -> {
       TextValidator textValidator = new TextValidator();
 
-      textValidator.setMandatory(parseBoolean(validator, FORM_VALIDATOR_MANDATORY));
-      textValidator.setMinSize(parseInteger(validator, FORM_VALIDATOR_MINSIZE));
-      textValidator.setMaxSize(parseInteger(validator, FORM_VALIDATOR_MAXSIZE));
-      textValidator.setRegexp(parseString(validator, FORM_VALIDATOR_REGEXP));
+      textValidator.setMandatory(getBoolean(validator, FORM_VALIDATOR_MANDATORY));
+      textValidator.setMinSize(getInteger(validator, FORM_VALIDATOR_MINSIZE));
+      textValidator.setMaxSize(getInteger(validator, FORM_VALIDATOR_MAXSIZE));
+      textValidator.setRegexp(getString(validator, FORM_VALIDATOR_REGEXP));
 
       formElement.setValidator(textValidator);
     });

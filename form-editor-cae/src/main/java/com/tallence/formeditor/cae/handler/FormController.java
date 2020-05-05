@@ -43,6 +43,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -99,6 +100,15 @@ public class FormController {
     List<FormElement> formElements = getFormElements(target);
 
     parseInputFormData(postData, request, formElements);
+    //parse the files here already, before the validator runs
+    List<MultipartFile> files = parseFileFormData(target, request, formElements);
+
+    //Remove elements with unfulfilled dependencies, e.g. dependencies on other elements.
+    for (Iterator<FormElement> iterator = formElements.iterator(); iterator.hasNext(); ) {
+      if (!iterator.next().dependencyFulfilled(formElements)) {
+        iterator.remove();
+      }
+    }
 
     //After all values are set: handle validationResult
     for (FormElement<?> formElement : formElements) {
@@ -130,8 +140,6 @@ public class FormController {
           escapedPostData.put(key, value.stream().map(HtmlUtils::htmlEscape).collect(Collectors.toList())));
       parseInputFormData(escapedPostData, request, formElements);
     }
-
-    List<MultipartFile> files = parseFileFormData(target, request, formElements);
 
     //Default for an empty actionKey: the DefaultAction
     String actionKey = target.getFormAction();
@@ -168,7 +176,10 @@ public class FormController {
 
   private List<MultipartFile> parseFileFormData(FormEditor target, HttpServletRequest request, List<FormElement> formElements) {
 
-    List<FormElement> fileFields = formElements.stream().filter(e -> e instanceof FileUpload).collect(Collectors.toList());
+    List<FileUpload> fileFields = formElements.stream()
+            .filter(FileUpload.class::isInstance)
+            .map(FileUpload.class::cast)
+            .collect(Collectors.toList());
     if (!fileFields.isEmpty()) {
       if (!(request instanceof MultipartHttpServletRequest)) {
         throw new IllegalStateException(
@@ -182,9 +193,9 @@ public class FormController {
     }
   }
 
-  private MultipartFile processFileInput(MultipartHttpServletRequest multipartRequest, FormElement e) {
-    MultipartFile file = multipartRequest.getFile(e.getTechnicalName());
-    ((FileUpload) e).setValue(file);
+  private MultipartFile processFileInput(MultipartHttpServletRequest multipartRequest, FileUpload fileUpload) {
+    MultipartFile file = multipartRequest.getFile(fileUpload.getTechnicalName());
+    fileUpload.setValue(file);
     return file;
   }
 
@@ -196,9 +207,8 @@ public class FormController {
    * @return true, if google says, the token is valid
    */
   private boolean isHumanByReCaptcha(FormEditor target, CMChannel currentContext, MultiValueMap<String, String> postData) {
-    String googleReCaptchaResponse = postData.get("g-recaptcha-response").get(0);
-
     try {
+      String googleReCaptchaResponse = postData.get("g-recaptcha-response").get(0);
       return recaptchaService.isHuman(googleReCaptchaResponse, currentContext);
     } catch (Exception ex) {
       LOG.error("Failed to verify reCapture via google for form " + target.getContentId(), ex);

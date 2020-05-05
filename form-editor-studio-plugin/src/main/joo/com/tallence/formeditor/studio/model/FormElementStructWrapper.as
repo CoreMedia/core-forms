@@ -15,35 +15,45 @@
  */
 
 package com.tallence.formeditor.studio.model {
-import com.coremedia.cap.common.impl.StructSubBean;
+import com.coremedia.cap.content.ContentPropertyNames;
+import com.coremedia.cap.struct.Struct;
+import com.coremedia.cms.editor.sdk.premular.fields.struct.StructTreeNode;
+import com.coremedia.ui.data.PropertyPathExpression;
 import com.coremedia.ui.data.ValueExpression;
+import com.tallence.formeditor.studio.fields.advancedsettings.AdvancedSettingsFieldBase;
 
 public class FormElementStructWrapper {
 
+  public static const FORM_ELEMENTS_PROPERTY:String = "formElements";
   private static const TYPE_PROPERTY:String = "type";
 
-  private var formElementStruct:StructSubBean;
+  private var structPropertyName:String;
   private var id:String;
   private var formElementVE:ValueExpression;
   private var type:String;
   private var bindTo:ValueExpression;
   private var forceReadOnlyValueExpression:ValueExpression;
+  private var node:StructTreeNode;
 
-  public function FormElementStructWrapper(formElementStruct:StructSubBean,
-                                           id:String,
-                                           formElementVE:ValueExpression,
+  public function FormElementStructWrapper(node:StructTreeNode,
+                                           structPropertyName:String,
                                            bindTo:ValueExpression,
                                            forceReadOnlyValueExpression:ValueExpression) {
-    this.formElementStruct = formElementStruct;
-    this.id = id;
-    this.formElementVE = formElementVE;
-    this.type = getString(TYPE_PROPERTY);
+    this.node = node;
+    this.structPropertyName = structPropertyName;
+    this.id = node.getPropertyName();
+    this.formElementVE = bindTo.extendBy(ContentPropertyNames.PROPERTIES, structPropertyName, FORM_ELEMENTS_PROPERTY, this.id);
+    this.type = getStructStringProperty(node.getValueAsStruct(), TYPE_PROPERTY);
     this.bindTo = bindTo;
     this.forceReadOnlyValueExpression = forceReadOnlyValueExpression;
   }
 
   public function getId():String {
-    return id;
+    return node.getPropertyName();
+  }
+
+  public function getCustomId():String {
+    return getStructStringProperty(getSubStruct("advancedSettings"), AdvancedSettingsFieldBase.CUSTOM_ID);
   }
 
   public function getFormElementVE():ValueExpression {
@@ -62,11 +72,21 @@ public class FormElementStructWrapper {
     return type;
   }
 
-  private function getString(propertyName:String):String {
-    if (formElementStruct && formElementStruct.get(propertyName)) {
-      return formElementStruct.get(propertyName);
-    }
-    return "";
+  /**
+   * Returns the property path of the applied form element.
+   * e.g. 'formData.formElements.320798398'
+   */
+  public function getPropertyPath():String {
+    var path:String = (getFormElementVE() as PropertyPathExpression).getPropertyPath();
+    return path.replace("value.properties.", "");
+  }
+
+  private function getSubStruct(propertyName:String):Struct {
+    return node.getValueAsStruct() && node.getValueAsStruct().get(propertyName);
+  }
+
+  private static function getStructStringProperty(struct:Struct, propertyName:String):String {
+    return struct ? struct.get(propertyName) : "";
   }
 
 }
