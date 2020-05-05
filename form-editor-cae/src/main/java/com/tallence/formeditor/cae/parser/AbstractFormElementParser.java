@@ -16,7 +16,6 @@
 
 package com.tallence.formeditor.cae.parser;
 
-import com.coremedia.blueprint.base.util.StructUtil;
 import com.coremedia.cap.struct.Struct;
 import com.tallence.formeditor.cae.elements.AdvancedSettings;
 import com.tallence.formeditor.cae.elements.ComplexValue;
@@ -26,7 +25,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.coremedia.blueprint.base.util.StructUtil.*;
+import static com.coremedia.cap.util.StructUtil.getBoolean;
+import static com.coremedia.cap.util.StructUtil.getInteger;
+import static com.coremedia.cap.util.StructUtil.getString;
+import static com.coremedia.cap.util.StructUtil.getSubstruct;
 import static java.util.Optional.ofNullable;
 
 /**

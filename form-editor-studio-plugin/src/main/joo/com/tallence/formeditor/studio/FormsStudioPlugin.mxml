@@ -36,7 +36,8 @@
       </editor:plugins>
     </editor:TabbedDocumentFormDispatcher>
 
-    <editor:NewContentMenu>
+    <!-- Removed: Should be configured in user preferences individually -->
+    <!--<editor:NewContentMenu>
       <editor:plugins>
         <ui:AddItemsPlugin>
           <ui:items>
@@ -48,7 +49,7 @@
           </ui:before>
         </ui:AddItemsPlugin>
       </editor:plugins>
-    </editor:NewContentMenu>
+    </editor:NewContentMenu>-->
 
   </local:rules>
 
