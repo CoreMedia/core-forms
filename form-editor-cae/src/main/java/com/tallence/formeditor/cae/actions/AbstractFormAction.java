@@ -41,13 +41,13 @@ public abstract class AbstractFormAction implements FormAction {
 
   private static final Logger LOG = LoggerFactory.getLogger(AbstractFormAction.class);
 
-  @Value("${social.ugcMailSender}")
+  @Value("${social.ugcMailSender:info@setme.com}")
   private String mailSenderAddress;
-  @Value("${social.ugcMailSenderName}")
+  @Value("${social.ugcMailSenderName:ugcMailSenderName}")
   private String mailSenderName;
-  @Value("${social.ugcHBMailSender}")
+  @Value("${social.ugcHBMailSender:ugcHBMailSender}")
   private String hbMmailSenderAddress;
-  @Value("${social.ugcHBMailSenderName}")
+  @Value("${social.ugcHBMailSenderName:ugcHBMailSenderName}")
   private String hbMailSenderName;
 
   protected final FormEditorMailAdapter mailAdapter;

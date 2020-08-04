@@ -30,4 +30,6 @@
     <constructor-arg value="${google.reCaptcha.server-secret}"/>
   </bean>
 
+  <bean id="reCaptchaAuthenticationDefaults" class="com.tallence.formeditor.cae.handler.ReCaptchaServiceImpl$ReCaptchaAuthenticationDefaults"/>
+
 </beans>

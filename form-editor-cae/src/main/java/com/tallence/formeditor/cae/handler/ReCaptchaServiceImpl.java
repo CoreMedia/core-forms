@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -94,6 +96,12 @@ public class ReCaptchaServiceImpl implements ReCaptchaService {
       this.websiteSecret = websiteSecret;
       this.serverSecret = serverSecret;
     }
+  }
+
+  @Configuration
+  @PropertySource("classpath:/com/tallence/formeditor/cae/handler/captcha-authentication-defaults.properties")
+  public static class ReCaptchaAuthenticationDefaults {
+
   }
 
   @JsonIgnoreProperties(ignoreUnknown = true)
