@@ -39,7 +39,7 @@
     <!-- CoreMedia -->
     <dependency>
       <groupId>com.coremedia.cms</groupId>
-      <artifactId>cae-linkservices-api</artifactId>
+      <artifactId>cae-linkservices</artifactId>
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
@@ -51,7 +51,7 @@
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
-      <artifactId>cae-contentbeanservices-api</artifactId>
+      <artifactId>cae-contentbeanservices</artifactId>
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
@@ -109,6 +109,7 @@
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
       <scope>runtime</scope>
+      <version>1.4</version>
     </dependency>
     <dependency>
       <groupId>com.github.spotbugs</groupId>
