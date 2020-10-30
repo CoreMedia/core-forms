@@ -7,6 +7,8 @@
                            formElementIconCls="tallence-icons tallence-icons--input-mail"
                            formElementGroup="input">
   <fx:Script><![CDATA[
+    import ext.data.Store;
+
     public static const xtype:String = "com.tallence.formeditor.studio.elements.usersMailEditor";
     public static const FIELD_TYPE:String = "UsersMail";
 
@@ -15,6 +17,12 @@
     protected static var COMBO_VALUE_NEVER:String = 'NEVER';
 
     public native function UsersMailEditor(config:UsersMailEditor = null);
+
+    private static function setStore(input:Array):Store {
+      var temp:Store = new Store();
+      temp.data = input;
+      return temp;
+    };
     ]]>
     </fx:Script>
 
@@ -31,10 +39,10 @@
         <fields:ComboBoxField fieldLabel="{resourceManager.getString('com.tallence.formeditor.studio.bundles.FormEditor', 'FormEditor_usersMail_mailType_label')}"
                               emptyText="{resourceManager.getString('com.tallence.formeditor.studio.bundles.FormEditor', 'FormEditor_usersMail_mailType_label')}"
                               propertyName="copyType"
-                              store="{[
+                              store="{ setStore([
                                 [ COMBO_VALUE_CHECKBOX, resourceManager.getString('com.tallence.formeditor.studio.bundles.FormEditor', 'FormEditor_usersMail_mailType_checkbox') ],
                                 [ COMBO_VALUE_NEVER, resourceManager.getString('com.tallence.formeditor.studio.bundles.FormEditor', 'FormEditor_usersMail_mailType_never') ],
-                                [ COMBO_VALUE_ALWAYS, resourceManager.getString('com.tallence.formeditor.studio.bundles.FormEditor', 'FormEditor_usersMail_mailType_always')]/**/]}"/>
+                                [ COMBO_VALUE_ALWAYS, resourceManager.getString('com.tallence.formeditor.studio.bundles.FormEditor', 'FormEditor_usersMail_mailType_always')]/**/])}"/>
         <advancedsettings:AdvancedSettingsField propertyName="advancedSettings"/>
   </local:items>
 </local:AbstractFormElement>
