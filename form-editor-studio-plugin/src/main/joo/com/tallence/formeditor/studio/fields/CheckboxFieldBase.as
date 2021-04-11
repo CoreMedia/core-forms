@@ -22,6 +22,9 @@ public class CheckboxFieldBase extends FormEditorField {
   [Bindable]
   public var defaultValue:Boolean = false;
 
+  [Bindable]
+  public var boxLabel:String = null;
+
   public function CheckboxFieldBase(config:CheckboxField = null) {
     super(config);
   }

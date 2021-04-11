@@ -119,6 +119,7 @@
           <elements:SelectBoxEditor/>
           <elements:CheckBoxesEditor/>
           <elements:RadioButtonsEditor/>
+          <elements:DateFieldEditor/>
         </formeditor:formElements>
     </formeditor:FormEditorDocumentForm>
 

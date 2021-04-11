@@ -21,8 +21,7 @@ import com.tallence.formeditor.cae.elements.SelectBox;
 import com.tallence.formeditor.cae.validator.SelectBoxValidator;
 import org.springframework.stereotype.Component;
 
-import static com.coremedia.cap.util.StructUtil.getBoolean;
-import static com.coremedia.cap.util.StructUtil.getSubstruct;
+import static com.coremedia.cap.util.StructUtil.*;
 import static java.util.Optional.ofNullable;
 
 /**

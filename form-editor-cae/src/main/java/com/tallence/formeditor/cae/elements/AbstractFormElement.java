@@ -16,6 +16,7 @@
 
 package com.tallence.formeditor.cae.elements;
 
+import com.tallence.formeditor.cae.validator.ValidationFieldError;
 import com.tallence.formeditor.cae.validator.Validator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.MultiValueMap;
@@ -36,6 +37,7 @@ public abstract class AbstractFormElement<T, V extends Validator<T>> implements 
   private String id;
   private String name;
   private String hint;
+  private String placeholder;
   private T value;
   private V validator;
   private AdvancedSettings settings;
@@ -46,7 +48,7 @@ public abstract class AbstractFormElement<T, V extends Validator<T>> implements 
   }
 
   @Override
-  public List<String> getValidationResult() {
+  public List<ValidationFieldError> getValidationResult() {
     return this.validator != null ? this.validator.validate(getValue()) : Collections.emptyList();
   }
 
@@ -135,6 +137,16 @@ public abstract class AbstractFormElement<T, V extends Validator<T>> implements 
   @Override
   public void setHint(String hint) {
     this.hint = hint;
+  }
+
+  @Override
+  public String getPlaceholder() {
+    return this.placeholder;
+  }
+
+  @Override
+  public void setPlaceholder(String placeholder) {
+    this.placeholder = placeholder;
   }
 
   @Override

@@ -19,9 +19,12 @@ Form-Actions and -fields can be customized and added by your need.
 
 # Getting started
 
-The extension runs with CoreMedia 10 (v1907.02). The extension also runs with CoreMedia 9 (v19.04) and is compatible with the versions 17.10 and 18.10. The branch for CoreMedia 9 support can be found here: https://github.com/tallence/core-forms/tree/1904.2-compatible.
+The extension runs with CoreMedia 10 (v2101.1). The extension also runs with:
+- v2010.2. See the branch [2010.2-compatible](https://github.com/tallence/core-forms/tree/2010.2-compatible).
+- CoreMedia 9 (v19.04). See the branch: [1904.2-compatible](https://github.com/tallence/core-forms/tree/1904.2-compatible).
+  It is in general compatible with the versions 17.10 and 18.10, but some small changes could be required (import paths, names of artifacts)
 
-This repo covers the studio- and the backend-cae part. If you are looking for an example implementation for the frontend part (ftl-Templates, css, js) have a look here: [core-forms-frontend](https://github.com/tallence/core-forms-frontend)
+This repo covers the studio- and the backend-cae part. If you are looking for an example implementation for the frontend part (a Vue.js-App wrapped in a CoreMedia-Frontend-Workspace-Theme) have a look here: [core-forms-frontend](https://github.com/tallence/core-forms-frontend)
 
 ## Integrate the Code in your CoreMedia Blueprint Workspace
 You can integrate the extension in three ways:
@@ -41,7 +44,7 @@ git submodule add  https://github.com/tallence/core-forms.git modules/extensions
 
 - Use the extension tool in the root folder of the project to link the modules into your workspace.
  ```
-mvn -f workspace-configuration/extensions com.coremedia.maven:extensions-maven-plugin:LATEST:sync -Denable=formeditor-extension
+mvn -f workspace-configuration/extensions com.coremedia.maven:extensions-maven-plugin:LATEST:sync -Denable=core-forms
 ```
  
 **2. Copy files**
@@ -71,6 +74,15 @@ The module form-editor-cae contains the adapters as interfaces, you need to crea
 Be aware of the 2 Void-Adapters, they were created to let you have a frustration-free first integration-experience with the formEditor: Your Adapter-Implementations need to use a Primary-Annotation. Otherwise, Spring will not be able to choose the right one for your project.  
 
 * The [FormEditorMailAdapter](https://github.com/tallence/core-forms/blob/master/form-editor-cae/src/main/java/com/tallence/formeditor/cae/actions/FormEditorMailAdapter.java) is used to send mails to the user and the form admin. You might want to send the mails directly via JavaMailSender or via the CoreMedia elastic queue.
-* The [FormEditorStorageAdapter](https://github.com/tallence/core-forms/blob/master/form-editor-cae/src/main/java/com/tallence/formeditor/cae/actions/FormEditorStorageAdapter.java) is used to store the form data in a storage of your choice, e.g. the elastic social mongoDB or a custom DB or CRM. 
+* The [FormEditorStorageAdapter](https://github.com/tallence/core-forms/blob/master/form-editor-cae/src/main/java/com/tallence/formeditor/cae/actions/FormEditorStorageAdapter.java) is used to store the form data in a storage of your choice, e.g. the elastic social mongoDB or a custom DB or CRM.
+
+**3. Think about Security**
+The FormController should be protected according to the required level of security. 
+This could be:
+* A ReCaptcha. This is an out-of-the-box feature in the FormEditor and can be activated by editors (BooleanProperty spamProtectionEnabled). but it is deactivated by default. To activate it by default remove the BooleanPropertyEditor in the Studio Form and modify the FormController (remove `if (target.isSpamProtectionEnabled()) {`). 
+* By default a CSRF Token is required by the `org.springframework.security.web.csrf.CsrfFilter`. But you need to create one explicitly in your frontend. Otherwise the Post request will be rejected. If you do not want to use Csrf-Tokens, you cann add the property `cae.csrf.ignore-paths[1]=/servlet/dynamic/forms/**` to your CAEs.  
+
+A Captcha is considered more secure than a Csrf-Token, also see [what the smart guys wrote about that.](http://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet). And it also protects from Spam.
+
 
 That's it. Have fun ;) If you have any problems, questions, ideas, critics please contact us or create an issue. 

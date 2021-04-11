@@ -18,7 +18,6 @@ package com.tallence.formeditor.studio.elements {
 import com.coremedia.ui.data.ValueExpression;
 import com.coremedia.ui.data.ValueExpressionFactory;
 import com.coremedia.ui.data.ValueExpressionValueHolder;
-import com.coremedia.ui.data.dependencies.DependencyTracker;
 import com.coremedia.ui.util.ObservableUtil;
 import com.tallence.formeditor.studio.model.FormElementStructWrapper;
 

@@ -20,11 +20,14 @@ import com.coremedia.blueprint.common.services.context.CurrentContextService;
 import com.coremedia.blueprint.testing.ContentTestHelper;
 import com.coremedia.cap.test.xmlrepo.XmlRepoConfiguration;
 import com.coremedia.cap.test.xmlrepo.XmlUapiConfig;
+import com.coremedia.cms.delivery.configuration.DeliveryConfigurationProperties;
+import com.coremedia.objectserver.configuration.CaeConfigurationProperties;
 import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
 import com.tallence.formeditor.cae.elements.FormElement;
 import com.tallence.formeditor.cae.handler.ReCaptchaService;
 import com.tallence.formeditor.cae.handler.ReCaptchaServiceImpl;
 import com.tallence.formeditor.cae.parser.AbstractFormElementParser;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 
 import java.util.List;
@@ -44,15 +47,27 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_SING
         ID_PROVIDER,
         HANDLERS,
         LINK_FORMATTER,
-        "classpath:/com/tallence/formeditor/contentbeans/formeditor-contentbeans.xml",
+        VIEW_RESOLVER,
+        "classpath:/framework/spring/blueprint-contentbeans.xml",
+        "classpath:/META-INF/coremedia/component-forms.xml",
         "classpath:/framework/spring/blueprint-handlers.xml",
         "classpath:/framework/spring/blueprint-services.xml",
-        "classpath:/framework/spring/blueprint-contentbeans.xml"
+        "classpath:/com/tallence/formeditor/cae/testdata/bundle-replace-context.xml",
     },
     reader = ResourceAwareXmlBeanDefinitionReader.class
 )
-@ComponentScan(basePackages = "com.tallence.formeditor.cae")
+@PropertySource("classpath:com/tallence/formeditor/cae/test.properties")
 @Import({XmlRepoConfiguration.class})
+@ComponentScan(basePackages = {
+    "com.tallence.formeditor.cae",
+    "com.coremedia.cms.delivery.configuration",
+    "com.coremedia.objectserver.configuration",
+    "com.coremedia.objectserver.web.config"
+})
+@EnableConfigurationProperties({
+        DeliveryConfigurationProperties.class,
+        CaeConfigurationProperties.class
+})
 public class FormTestConfiguration {
 
   private static final String CONTENT_REPOSITORY = "classpath:/com/tallence/formeditor/cae/testdata/contenttest.xml";
@@ -89,5 +104,7 @@ public class FormTestConfiguration {
   public FormFreemarkerFacade freemarkerFacade(FormElementFactory formElementFactory, ReCaptchaService reCaptchaService, CurrentContextService currentContextService) {
     return new FormFreemarkerFacade(formElementFactory, reCaptchaService, currentContextService);
   }
+
+
 
 }

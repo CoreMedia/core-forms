@@ -16,39 +16,55 @@
 
 package com.tallence.formeditor.cae.validator;
 
+import com.tallence.formeditor.cae.validator.annotation.ValidationMessage;
+import com.tallence.formeditor.cae.validator.annotation.ValidationProperty;
 import org.springframework.util.StringUtils;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import static com.tallence.formeditor.cae.validator.NumberValidator.MESSAGE_KEY_NUMBERFIELD_NAN;
 
 /**
  * Validator for elements of type {@link com.tallence.formeditor.cae.elements.NumberField}
  */
+@ValidationMessage(name = "number", messageKey = MESSAGE_KEY_NUMBERFIELD_NAN)
 public class NumberValidator implements Validator<String>, SizeValidator {
 
+  static final String MESSAGE_KEY_NUMBERFIELD_MIN = "com.tallence.forms.numberfield.min";
+  static final String MESSAGE_KEY_NUMBERFIELD_MAX = "com.tallence.forms.numberfield.max";
+  protected static final String MESSAGE_KEY_NUMBERFIELD_NAN = "com.tallence.forms.numberfield.nan";
+  private static final String MESSAGE_KEY_NUMBERFIELD_REQUIRED = "com.tallence.forms.numberfield.empty";
+
+  @ValidationProperty(messageKey = MESSAGE_KEY_NUMBERFIELD_REQUIRED)
   private boolean mandatory;
+
+  @ValidationProperty(messageKey = MESSAGE_KEY_NUMBERFIELD_MIN)
   private Integer minSize;
+
+  @ValidationProperty(messageKey = MESSAGE_KEY_NUMBERFIELD_MAX)
   private Integer maxSize;
 
   @Override
-  public List<String> validate(String value) {
+  public List<ValidationFieldError> validate(String value) {
 
-    List<String> errors = new ArrayList<>();
+    List<ValidationFieldError> errors = new ArrayList<>();
     if (StringUtils.hasText(value)) {
       if (!value.matches("\\d+")) {
-        errors.add("com.tallence.forms.numberfield.nan");
-        return errors;
+        return Collections.singletonList(new ValidationFieldError(MESSAGE_KEY_NUMBERFIELD_NAN));
       }
 
-      Integer number = Integer.valueOf(value);
-      if (this.minSize != null && number < this.minSize) {
-        errors.add("com.tallence.forms.numberfield.tooshort");
+      BigInteger number = new BigInteger(value);
+      if (this.minSize != null && number.compareTo(BigInteger.valueOf(minSize)) < 0) {
+        errors.add(new ValidationFieldError(MESSAGE_KEY_NUMBERFIELD_MIN, minSize));
       }
-      if (this.maxSize != null && number > this.maxSize) {
-        errors.add("com.tallence.forms.numberfield.toolong");
+      if (this.maxSize != null && number.compareTo(BigInteger.valueOf(maxSize)) > 0) {
+        errors.add(new ValidationFieldError(MESSAGE_KEY_NUMBERFIELD_MAX, this.maxSize));
       }
     } else if (this.mandatory) {
-      errors.add("com.tallence.forms.numberfield.empty");
+      errors.add(new ValidationFieldError(MESSAGE_KEY_NUMBERFIELD_REQUIRED));
     }
 
     return errors;
