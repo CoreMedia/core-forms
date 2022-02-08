@@ -16,6 +16,9 @@
       "@coremedia-blueprint/studio-client.main.blueprint-forms/*": [
         "../../../../../../../../../apps/studio-client/apps/main/blueprint-forms/src/*"
       ],
+      "@coremedia-blueprint/studio-client.main.salesdemo-feature-modifier/*": [
+        "../../../../../../../../../apps/studio-client/apps/main/salesdemo-feature-modifier/src/*"
+      ],
       "@coremedia/studio-client.app-context-models/*": [
         "../../../../../../../../../apps/studio-client/node_modules/.pnpm/@coremedia+studio-client.app-context-models@2110.1.0/node_modules/@coremedia/studio-client.app-context-models/src/*"
       ],
@@ -56,7 +59,7 @@
         "../../../../../../../../../apps/studio-client/node_modules/.pnpm/@coremedia+studio-client.content-link-list-models@2110.1.0/node_modules/@coremedia/studio-client.content-link-list-models/src/*"
       ],
       "@coremedia/studio-client.core-icons/*": [
-        "../../../../../../../../../apps/studio-client/node_modules/.pnpm/@coremedia+studio-client.core-icons@2110.1.0/node_modules/@coremedia/studio-client.core-icons/src/*"
+        "../node_modules/@coremedia/studio-client.core-icons/src/*"
       ],
       "@coremedia/studio-client.embed-app-services-api/*": [
         "../../../../../../../../../apps/studio-client/node_modules/.pnpm/@coremedia+studio-client.embed-app-services-api@2110.1.0/node_modules/@coremedia/studio-client.embed-app-services-api/src/*"
