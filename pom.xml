@@ -20,7 +20,6 @@
     <module>form-editor-test-util</module>
     <module>form-editor-headless-server</module>
     <module>form-editor-shared</module>
-    <module>form-editor-test-util</module>
   </modules>
 
 </project>
