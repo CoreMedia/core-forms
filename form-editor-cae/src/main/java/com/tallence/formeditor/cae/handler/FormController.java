@@ -22,6 +22,7 @@ import com.coremedia.blueprint.cae.web.links.NavigationLinkSupport;
 import com.coremedia.blueprint.common.contentbeans.CMChannel;
 import com.coremedia.blueprint.common.navigation.Navigation;
 import com.coremedia.blueprint.common.services.context.CurrentContextService;
+import com.coremedia.cap.content.Content;
 import com.coremedia.objectserver.web.links.Link;
 import com.tallence.formeditor.cae.FormFreemarkerFacade;
 import com.tallence.formeditor.cae.actions.DefaultFormAction;
