@@ -71,9 +71,9 @@ class FormEditorForm extends DocumentTabPanel {
       items: [
         Config(DocumentForm, {
           title: FormEditor_properties.FormEditor_tab_content_title,
+          itemId: "contentTab",
           items: [
             Config(DetailsDocumentForm, { bindTo: config.bindTo }),
-
             Config(TeaserDocumentForm, {
               bindTo: config.bindTo,
               collapsed: true,
@@ -87,6 +87,7 @@ class FormEditorForm extends DocumentTabPanel {
         }),
         Config(DocumentForm, {
           title: FormEditor_properties.FormEditor_tab_formData_title,
+          itemId: "formData",
           items: [
 
             Config(PropertyFieldGroup, {
