@@ -24,6 +24,7 @@ interface FormEditor_properties {
   FormEditor_label_element_phoneField: string;
   FormEditor_label_element_streetNumberField: string;
   FormEditor_label_element_zipField: string;
+  FormEditor_label_element_ibanField: string;
   FormEditor_label_query_title: string;
   FormEditor_tooltip_deletethis: string;
   FormEditor_label_delete_all_elements: string;
@@ -32,6 +33,7 @@ interface FormEditor_properties {
   FormEditor_text_add_element: string;
   FormEditor_text_label_option: string;
   FormEditor_text_add_option: string;
+  FormEditor_text_add_option_disabled: string;
   FormEditor_text_edit_option: string;
   FormEditor_text_save_option: string;
   FormEditor_text_move_option_up: string;
@@ -59,6 +61,8 @@ interface FormEditor_properties {
   FormEditor_element_collapsiblePanel_label: string;
   FormEditor_element_textField_emptyText: string;
   FormEditor_element_numberField_emptyText: string;
+  FormEditor_element_hiddenField_value_label: string;
+  FormEditor_element_hiddenField_value_emptyText: string;
   FormEditor_element_dateField_autoToday: string;
   FormEditor_element_name_label: string;
   FormEditor_element_name_emptyText: string;
@@ -135,6 +139,7 @@ const FormEditor_properties: FormEditor_properties = {
   FormEditor_label_element_phoneField: "Phone",
   FormEditor_label_element_streetNumberField: "Street & HouseNr.",
   FormEditor_label_element_zipField: "Zip",
+  FormEditor_label_element_ibanField: "IBAN field",
   FormEditor_label_query_title: "Selected form elements",
   FormEditor_tooltip_deletethis: "Delete this element",
   FormEditor_label_delete_all_elements: "Delete all elements",
@@ -143,6 +148,7 @@ const FormEditor_properties: FormEditor_properties = {
   FormEditor_text_add_element: "Drop a form element here.",
   FormEditor_text_label_option: "Options",
   FormEditor_text_add_option: "Add new option",
+  FormEditor_text_add_option_disabled: "The option text must not be empty or contain dots",
   FormEditor_text_edit_option: "Edit option",
   FormEditor_text_save_option: "Save option",
   FormEditor_text_move_option_up: "Move option up",
@@ -170,6 +176,8 @@ const FormEditor_properties: FormEditor_properties = {
   FormEditor_element_collapsiblePanel_label: "Collapsible form element.",
   FormEditor_element_textField_emptyText: "Please enter a text.",
   FormEditor_element_numberField_emptyText: "Please enter a number.",
+  FormEditor_element_hiddenField_value_label: "Hidden value",
+  FormEditor_element_hiddenField_value_emptyText: "Please enter the hidden value.",
   FormEditor_element_dateField_autoToday: "Always set to current date",
   FormEditor_element_name_label: "Name",
   FormEditor_element_name_emptyText: "Name of the form field.",

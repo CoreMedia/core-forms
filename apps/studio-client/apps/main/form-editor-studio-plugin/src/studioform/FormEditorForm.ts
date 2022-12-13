@@ -45,6 +45,8 @@ import InputCity from "../icons/input-city-zip.svg";
 import InputFax from "../icons/input-fax.svg";
 import InputPhone from "../icons/input-phone.svg";
 import InputStreet from "../icons/input-street-nr.svg";
+import HiddenFieldEditor from "../elements/HiddenFieldEditor";
+import IbanFieldEditor from "../elements/IbanFieldEditor";
 
 interface FormEditorFormConfig extends Config<DocumentTabPanel> {
 }
@@ -168,6 +170,8 @@ class FormEditorForm extends DocumentTabPanel {
             Config(CheckBoxesEditor),
             Config(RadioButtonsEditor),
             Config(DateFieldEditor),
+            Config(IbanFieldEditor),
+            Config(HiddenFieldEditor),
           ],
         }),
         Config(MultiLanguageDocumentForm, { bindTo: config.bindTo }),
