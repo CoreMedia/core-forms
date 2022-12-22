@@ -36,6 +36,12 @@ type AbstractFormElement implements FormElement{
   validator: Validator
 }
 
+interface IbanField @inherit(from: ["FormElement"]) {
+}
+
+type IbanFieldImpl implements IbanField @inherit(from: ["AbstractFormElement"]) {
+}
+
 interface TextField @inherit(from: ["FormElement"]) {
 }
 
@@ -189,6 +195,11 @@ type TextValidator implements Validator & SizeValidator {
 type TextOnlyValidator implements Validator {
   mandatory: Boolean
 }
+
+type IbanFieldValidator implements Validator {
+  mandatory: Boolean
+}
+
 type SelectBoxValidator implements Validator {
   mandatory: Boolean
 }
