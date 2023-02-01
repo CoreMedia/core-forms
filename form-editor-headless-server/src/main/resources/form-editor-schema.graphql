@@ -38,6 +38,14 @@ type AbstractFormElement implements FormElement{
   validator: Validator
 }
 
+interface PageElement @inherit(from: ["FormElement"]) {
+  formElements: [FormElement]
+}
+
+type PageElementImpl implements PageElement @inherit(from: ["AbstractFormElement"]) {
+    formElements: [FormElement]
+}
+
 interface IbanField @inherit(from: ["FormElement"]) {
 }
 
