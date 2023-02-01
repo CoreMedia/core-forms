@@ -62,7 +62,8 @@ public class FormEditorValidator extends ContentTypeValidatorBase {
   @Override
   public void validate(Content content, Issues issues) {
 
-    CurrentFormSupplier.setCurrentForm(content);
+    // removed the this, since CurrentFormSupplier needs to access the request context, which does not exist in Studio.
+    //CurrentFormSupplier.setCurrentForm(content);
 
     String action = content.getString(formActionProperty);
 
