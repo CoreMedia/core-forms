@@ -68,11 +68,6 @@
     </dependency>
     <dependency>
       <groupId>com.coremedia.cms</groupId>
-      <artifactId>coremedia-spring</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.coremedia.cms</groupId>
       <artifactId>cap-unified-api</artifactId>
       <!-- scope provided because it is only used indirectly when compiling the contentBeans usage -->
       <scope>provided</scope>
@@ -91,16 +86,6 @@
     </dependency>
 
     <!-- Spring -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-autoconfigure</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
