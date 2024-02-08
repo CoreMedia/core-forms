@@ -8,7 +8,7 @@ import com.tallence.formeditor.elements.PageElement;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import java.util.Collections;
 import java.util.Optional;
 

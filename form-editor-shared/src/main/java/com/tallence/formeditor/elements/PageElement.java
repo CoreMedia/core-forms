@@ -5,7 +5,7 @@ import com.tallence.formeditor.validator.PageElementValidator;
 import com.tallence.formeditor.validator.ValidationFieldError;
 import org.springframework.util.MultiValueMap;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;

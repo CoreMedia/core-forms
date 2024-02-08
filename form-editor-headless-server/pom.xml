@@ -10,6 +10,7 @@
   <artifactId>form-editor-headless-server</artifactId>
   <properties>
     <coremedia.project.extension.for>headless-server</coremedia.project.extension.for>
+    <org.reflections.version>0.10.2</org.reflections.version>
   </properties>
   <dependencies>
     <dependency>
@@ -49,7 +50,13 @@
     <dependency>
       <groupId>org.reflections</groupId>
       <artifactId>reflections</artifactId>
-      <version>0.9.12</version>
+      <version>${org.reflections.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.google.code.findbugs</groupId>
+          <artifactId>jsr305</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
   </dependencies>
