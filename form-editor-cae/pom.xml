@@ -84,6 +84,10 @@
       <groupId>com.coremedia.cms</groupId>
       <artifactId>coremedia-xml</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.coremedia.cms</groupId>
+      <artifactId>coremedia-spring</artifactId>
+    </dependency>
 
     <!-- Spring -->
     <dependency>
@@ -202,11 +206,6 @@
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>cap-client-xml</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.coremedia.cms</groupId>
-      <artifactId>coremedia-spring</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
