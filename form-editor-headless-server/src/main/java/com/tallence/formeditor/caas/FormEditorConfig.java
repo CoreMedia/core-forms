@@ -36,13 +36,16 @@ import static java.util.stream.Collectors.toCollection;
 /**
  * Configuration for the FormEditor Headless component.
  * It is mapping the {@link FormElement}'s and {@link Validator}'s classes simpleNames to a GrapgQL-Schema-Element.
- *
+ * <p>
  * Custom additional FormElements and Validators might be added to the classPath as well and will be handled if they are
  * placed in the {@link com.tallence.formeditor.elements} or {@link com.tallence.formeditor.validator} packages.
  * For elements and validators outside this package, you will have to add these types in your custom {@link ProvidesTypeNameResolver}.
  */
 @Configuration(proxyBeanMethods = false)
-@Import(value = {MultiSiteConfiguration.class,})
+@Import(value = {
+        MultiSiteConfiguration.class,
+        FormElementFactory.class
+})
 public class FormEditorConfig {
 
   @Bean
@@ -59,7 +62,7 @@ public class FormEditorConfig {
             .collect(toCollection(ArrayList::new));
     formElementTypes.add(FormElement.class.getSimpleName());
 
-    return name -> formElementTypes.contains(name) ? Optional.of(true): Optional.empty();
+    return name -> formElementTypes.contains(name) ? Optional.of(true) : Optional.empty();
   }
 
   @Bean
@@ -71,7 +74,7 @@ public class FormEditorConfig {
             .collect(toCollection(ArrayList::new));
     validatorTypes.add(Validator.class.getSimpleName());
 
-    return name -> validatorTypes.contains(name) ? Optional.of(true): Optional.empty();
+    return name -> validatorTypes.contains(name) ? Optional.of(true) : Optional.empty();
   }
 
   @Bean
