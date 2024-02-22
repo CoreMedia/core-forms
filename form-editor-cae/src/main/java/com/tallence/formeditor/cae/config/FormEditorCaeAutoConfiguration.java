@@ -8,8 +8,10 @@ import com.tallence.formeditor.FormElementFactory;
 import com.tallence.formeditor.cae.FormFreemarkerFacade;
 import com.tallence.formeditor.cae.handler.ReCaptchaService;
 import com.tallence.formeditor.cae.handler.ReCaptchaServiceImpl;
+import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
@@ -27,12 +29,14 @@ import java.util.Map;
 @Import({
         FormEditorConfiguration.class
 })
+@EnableConfigurationProperties({
+        FormEditorCaeConfigurationProperties.class
+})
 public class FormEditorCaeAutoConfiguration {
 
   @Bean
-  public ReCaptchaService reCaptchaService(@Value("${google.reCaptcha.website-secret}") String websiteSecret,
-                                           @Value("${google.reCaptcha.server-secret}") String serverSecret) {
-    return new ReCaptchaServiceImpl(new ReCaptchaServiceImpl.ReCaptchaAuthentication(websiteSecret, serverSecret));
+  public ReCaptchaService reCaptchaService(FormEditorCaeConfigurationProperties formEditorCaeConfigurationProperties) {
+    return new ReCaptchaServiceImpl(new ReCaptchaServiceImpl.ReCaptchaAuthentication(formEditorCaeConfigurationProperties.getGoogleReCaptchaWebsiteSecret(), formEditorCaeConfigurationProperties.getGoogleReCaptchaServerSecret()));
   }
 
   // TODO: Configure cache capacity for FormConfigCacheKey
@@ -47,13 +51,16 @@ public class FormEditorCaeAutoConfiguration {
   </bean>
    */
 
+  @Bean
+  public FormFreemarkerFacade formFreemarkerFacade(FormElementFactory formElementFactory,
+                                                   ReCaptchaService reCaptchaService,
+                                                   CurrentContextService currentContextService ) {
+    return new FormFreemarkerFacade(formElementFactory, reCaptchaService, currentContextService);
+  }
+
   @Customize("freemarkerSharedVariables")
   @Bean(autowireCandidate = false)
-  public Map<String, FormFreemarkerFacade> formFreemarkerSharedVariablesCustomizer(
-          FormElementFactory formElementFactory,
-          ReCaptchaService reCaptchaService,
-          CurrentContextService currentContextService) {
-    FormFreemarkerFacade formFreemarkerFacade = new FormFreemarkerFacade(formElementFactory, reCaptchaService, currentContextService);
+  public Map<String, FormFreemarkerFacade> formFreemarkerSharedVariablesCustomizer(@NonNull FormFreemarkerFacade formFreemarkerFacade) {
     return Map.of("formFreemarkerFacade", formFreemarkerFacade);
   }
 
