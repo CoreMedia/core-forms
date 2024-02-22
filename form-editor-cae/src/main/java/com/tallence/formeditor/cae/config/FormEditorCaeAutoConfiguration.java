@@ -9,15 +9,15 @@ import com.tallence.formeditor.cae.FormFreemarkerFacade;
 import com.tallence.formeditor.cae.handler.ReCaptchaService;
 import com.tallence.formeditor.cae.handler.ReCaptchaServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 
 import java.util.Map;
 
-@Configuration
+@AutoConfiguration
 @ComponentScan(basePackages = {
         "com.tallence.formeditor.cae"
 })

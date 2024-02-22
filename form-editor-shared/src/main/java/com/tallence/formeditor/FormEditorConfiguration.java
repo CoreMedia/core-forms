@@ -2,13 +2,13 @@ package com.tallence.formeditor;
 
 import com.tallence.formeditor.elements.FormElement;
 import com.tallence.formeditor.parser.AbstractFormElementParser;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @ComponentScan(basePackages = "com.tallence.formeditor.parser")
 public class FormEditorConfiguration {
 

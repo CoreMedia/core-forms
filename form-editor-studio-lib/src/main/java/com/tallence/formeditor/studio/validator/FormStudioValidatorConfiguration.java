@@ -19,19 +19,19 @@ import com.coremedia.cap.common.CapConnection;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cap.multisite.impl.MultiSiteConfiguration;
 import com.tallence.formeditor.FormElementFactory;
+import com.tallence.formeditor.contentbeans.FormEditor;
 import com.tallence.formeditor.studio.validator.field.ComplexValidator;
 import com.tallence.formeditor.studio.validator.field.FieldValidator;
-import com.tallence.formeditor.contentbeans.FormEditor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-@Configuration(proxyBeanMethods = false)
+@AutoConfiguration
 @ComponentScan(basePackages = "com.tallence.formeditor.studio.validator.field")
 @Import(MultiSiteConfiguration.class)
 public class FormStudioValidatorConfiguration {
