@@ -3,13 +3,13 @@
   "version": "1.0.0-SNAPSHOT",
   "dependencies": {
     "@coremedia/studio-client.cap-base-models": "2404.1.0",
-    "@jangaroo/runtime": "3.0.0-alpha.5"
+    "@jangaroo/runtime": "3.0.0-alpha.6"
   },
   "devDependencies": {
-    "@jangaroo/build": "3.0.0-alpha.5",
-    "@jangaroo/core": "3.0.0-alpha.5",
+    "@jangaroo/build": "3.0.0-alpha.6",
+    "@jangaroo/core": "3.0.0-alpha.6",
     "@jangaroo/eslint-config": "3.0.0-alpha.2",
-    "@jangaroo/publish": "3.0.0-alpha.5",
+    "@jangaroo/publish": "3.0.0-alpha.6",
     "eslint": "^8.56.0",
     "rimraf": "^5.0.5"
   },
