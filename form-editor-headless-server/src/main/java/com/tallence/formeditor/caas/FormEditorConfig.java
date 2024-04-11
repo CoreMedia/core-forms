@@ -24,11 +24,16 @@ import com.tallence.formeditor.elements.FormElement;
 import com.tallence.formeditor.validator.Validator;
 import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toCollection;
@@ -91,5 +96,14 @@ public class FormEditorConfig {
       String simpleClassName = element.getClass().getSimpleName();
       return Optional.of(simpleClassName);
     };
+  }
+
+  @Bean
+  @Qualifier("graphqlSchemaResource")
+  public Resource formEditorSchemaResource() throws IOException {
+    PathMatchingResourcePatternResolver loader = new PathMatchingResourcePatternResolver();
+    return Arrays.stream(loader.getResources("classpath*:form-editor-schema.graphql"))
+            .findFirst()
+            .orElseThrow(() -> new IOException("GraphQl schema resource 'form-editor-schema.graphql' not found."));
   }
 }
