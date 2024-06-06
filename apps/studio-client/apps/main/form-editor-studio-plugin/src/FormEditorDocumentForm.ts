@@ -92,7 +92,7 @@ class FormEditorDocumentForm extends FormEditorDocumentFormBase {
             items: [
               /* left column, applicable form elements */
               Config(Container, {
-                width: 160,
+                width: 300,
                 items: [
                   /* Create a value expression to bind the disabled state of the drag source. It is necessary to use the
             two value expressions 'bindTo' and 'forceReadOnlyValueExpression' to create the read only value expression.

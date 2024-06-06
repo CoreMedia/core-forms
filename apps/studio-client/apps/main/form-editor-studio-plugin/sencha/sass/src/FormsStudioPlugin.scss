@@ -24,10 +24,10 @@
 
   .#{$form_element_block} {
     margin: 10px 15px 0 10px;
-    background: rgba(0, 0, 0, 0.04);
+    background: rgba(244, 244, 244, 0.2);
     border: 2px solid rgba(0, 0, 0, 0.04);
     padding: 6px;
-    color: rgba(0, 0, 0, 0.27);
+    color: rgb(255, 255, 255);
   }
 
   .#{$form_page_block} {
