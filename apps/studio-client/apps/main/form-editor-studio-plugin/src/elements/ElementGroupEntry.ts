@@ -26,6 +26,7 @@ import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import FormEditor_properties from "../bundles/FormEditor_properties";
 import ElementGroupEntryBase from "./ElementGroupEntryBase";
+import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 
 interface ElementGroupEntryConfig extends Config<ElementGroupEntryBase>, Partial<Pick<ElementGroupEntry,
   "forceReadOnlyValueExpression" |
@@ -64,6 +65,7 @@ class ElementGroupEntry extends ElementGroupEntryBase {
 
       /*Using focusableContainer(cm9-17 style) and enableFocusableContainer(cm9-18 style) to be compatible with all cm9-versions*/
       header: Config(PanelHeader, {
+        ui: PanelSkin.CARD.getSkin(),
         titlePosition: 2.0,
         focusableContainer: false,
         ...{ enableFocusableContainer: false },
