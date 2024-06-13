@@ -13,6 +13,11 @@ import java.util.ResourceBundle;
 public class ResourceBundleFactoryMock extends LinklistPageResourceBundleFactory {
 
   @Override
+  protected void initialize() {
+    // do nothing
+  }
+
+  @Override
   public ResourceBundle resourceBundle(Page page, @Nullable User developer) {
     return resourceBundle(page.getNavigation(), developer);
   }
