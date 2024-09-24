@@ -12,8 +12,8 @@
   <DocType Name="FormEditor" Parent="CMTeasable">
     <StringProperty Name="formAction" Length="128"/>
     <StringProperty Name="adminMails" Length="512"/>
-    <IntProperty Name="spamProtectionEnabled"/>
-    <IntProperty Name="pageableFormEnabled"/>
+    <IntProperty Name="spamProtection"/>
+    <IntProperty Name="pageableForm"/>
     <XmlProperty Name="formData" Grammar="coremedia-struct-2008"/>
   </DocType>
 

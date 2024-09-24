@@ -27,7 +27,7 @@ public class FormEditorHelper {
 
   public static String ADMIN_MAILS = "adminMails";
 
-  public static String FORM_SPAM_PROTECTION = "spamProtectionEnabled";
+  public static String FORM_SPAM_PROTECTION = "spamProtection";
 
   public static String FORM_PAGEABLE_ENABLED = "pageableFormEnabled";
 

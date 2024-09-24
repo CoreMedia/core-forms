@@ -169,7 +169,7 @@ class FormEditorForm extends DocumentTabPanel {
               collapsed: false,
               itemId: "spamProtectionGroup",
               items: [
-                Config(BooleanPropertyField, {propertyName: "spamProtectionEnabled"}),
+                Config(BooleanPropertyField, {propertyName: "spamProtection"}),
               ],
             }),
             Config(PropertyFieldGroup, {
