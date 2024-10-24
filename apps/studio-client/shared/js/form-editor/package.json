@@ -2,14 +2,14 @@
   "name": "@coremedia-blueprint/studio-client.form-editor",
   "version": "1.0.0-SNAPSHOT",
   "dependencies": {
-    "@coremedia/studio-client.cap-base-models": "^2406.0.3",
+    "@coremedia/studio-client.cap-base-models": "^2406.0.0",
     "@jangaroo/runtime": "^3.0.0"
   },
   "devDependencies": {
     "@jangaroo/build": "^3.0.1",
 
     "@jangaroo/core": "^3.0.1",
-    "@coremedia/eslint-config-studio-client-ext": "^2406.0.3",
+    "@coremedia/eslint-config-studio-client-ext": "^2406.0.0",
     "@jangaroo/publish": "^3.0.1",
     "eslint": "^8.57.0",
 
