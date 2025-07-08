@@ -21,7 +21,6 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
@@ -29,10 +28,10 @@ import static java.util.Optional.ofNullable;
 /**
  * Model bean for a configured CheckBoxesGroup.
  */
-public class CheckBoxesGroup extends AbstractFormElement<List, CheckBoxesGroupValidator> implements FieldWithOptions<List> {
+public class CheckBoxesGroup extends AbstractFormElement<List<String>, CheckBoxesGroupValidator> implements FieldWithOptions<List<String>> {
 
   public CheckBoxesGroup() {
-    super(List.class);
+    super((Class<List<String>>) (Class<?>) List.class); // Necessary due to type erasure
   }
 
   private List<ComplexValue> checkBoxes;
@@ -40,8 +39,10 @@ public class CheckBoxesGroup extends AbstractFormElement<List, CheckBoxesGroupVa
   @Override
   public String serializeValue() {
     return "[" +
-            getSelectedOptions().stream().map(ComplexValue::getDisplayName).collect(Collectors.joining(", ")) +
-            "]";
+      getSelectedOptions().stream()
+        .map(ComplexValue::getDisplayName)
+        .collect(Collectors.joining(", ")) +
+      "]";
   }
 
   /**
@@ -59,8 +60,10 @@ public class CheckBoxesGroup extends AbstractFormElement<List, CheckBoxesGroupVa
   }
 
   public List<ComplexValue> getSelectedOptions() {
-    List values = getValue() != null ? getValue() : Collections.emptyList();
-    return checkBoxes.stream().filter(checkBox -> values.contains(checkBox.getValue())).collect(Collectors.toList());
+    List<String> values = getValue() != null ? getValue() : Collections.emptyList();
+    return checkBoxes.stream()
+      .filter(checkBox -> values.contains(checkBox.getValue()))
+      .collect(Collectors.toList());
   }
 
   public void setCheckBoxes(List<ComplexValue> checkBoxes) {

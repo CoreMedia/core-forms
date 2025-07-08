@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Validator for elements of type {@link CheckBoxesGroup}
  */
-public class CheckBoxesGroupValidator implements SizeValidator<List> {
+public class CheckBoxesGroupValidator implements SizeValidator<List<String>> {
 
   private static final String MESSAGE_KEY_CHECKBOX_REQUIRED = "com.tallence.forms.checkboxes.empty";
   private static final String MESSAGE_KEY_CHECKBOX_MIN = "com.tallence.forms.checkboxes.min";
@@ -48,7 +48,7 @@ public class CheckBoxesGroupValidator implements SizeValidator<List> {
   }
 
   @Override
-  public List<ValidationFieldError> validate(List value) {
+  public List<ValidationFieldError> validate(List<String> value) {
 
     List<ValidationFieldError> errors = new ArrayList<>();
 
