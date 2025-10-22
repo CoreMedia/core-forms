@@ -17,6 +17,7 @@
 package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.TextValidator;
+import org.springframework.core.ResolvableType;
 
 /**
  * Model bean for a configured TextArea.
@@ -27,7 +28,7 @@ public class TextArea extends AbstractFormElement<String, TextValidator> {
   private Integer rows;
 
   public TextArea() {
-    super(String.class);
+    super(ResolvableType.forClass(String.class));
   }
 
   public Integer getColumns() {

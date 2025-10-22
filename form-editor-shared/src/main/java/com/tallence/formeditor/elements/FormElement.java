@@ -18,6 +18,7 @@ package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.ValidationFieldError;
 import edu.umd.cs.findbugs.annotations.Nullable;
+import org.springframework.core.ResolvableType;
 import org.springframework.util.MultiValueMap;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -63,7 +64,7 @@ public interface FormElement<T> {
 
   void setValue(T value);
 
-  Class<T> getType();
+  ResolvableType getType();
 
   /**
    * Make sure to check {@link #dependencyFulfilled} before calling this method. The field might dependent on another field which

@@ -17,6 +17,7 @@
 package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.TextOnlyValidator;
+import org.springframework.core.ResolvableType;
 
 /**
  * Model bean for a configured HiddenField.
@@ -26,7 +27,7 @@ import com.tallence.formeditor.validator.TextOnlyValidator;
 public class HiddenField extends AbstractFormElement<String, TextOnlyValidator> {
 
   public HiddenField() {
-    super(String.class);
+    super(ResolvableType.forClass(String.class));
   }
 
 }

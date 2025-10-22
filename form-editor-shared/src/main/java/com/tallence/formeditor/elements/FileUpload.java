@@ -17,6 +17,7 @@
 package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.FileUploadValidator;
+import org.springframework.core.ResolvableType;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +31,7 @@ import java.util.Map;
 public class FileUpload extends AbstractFormElement<MultipartFile, FileUploadValidator> {
 
   public FileUpload() {
-    super(MultipartFile.class);
+    super(ResolvableType.forClass(MultipartFile.class));
   }
 
 

@@ -17,6 +17,7 @@
 package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.TextValidator;
+import org.springframework.core.ResolvableType;
 
 /**
  * Model bean for a configured TextField.
@@ -24,7 +25,7 @@ import com.tallence.formeditor.validator.TextValidator;
 public class TextField extends AbstractFormElement<String, TextValidator> {
 
   public TextField() {
-    super(String.class);
+    super(ResolvableType.forClass(String.class));
   }
 
 }

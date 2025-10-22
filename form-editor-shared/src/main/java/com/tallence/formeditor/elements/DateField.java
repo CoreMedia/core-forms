@@ -18,6 +18,7 @@ package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.DateFieldValidator;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.ResolvableType;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -32,7 +33,7 @@ public class DateField extends AbstractFormElement<String, DateFieldValidator> {
   private final Locale locale;
 
   public DateField(Locale locale) {
-    super(String.class);
+    super(ResolvableType.forClass(String.class));
     this.locale = locale;
   }
 

@@ -18,6 +18,7 @@ package com.tallence.formeditor.elements;
 
 import com.coremedia.cap.content.Content;
 import com.tallence.formeditor.validator.ConsentFormCheckboxValidator;
+import org.springframework.core.ResolvableType;
 import org.springframework.util.MultiValueMap;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class ConsentFormCheckBox extends AbstractFormElement<Boolean, ConsentFor
   private Content linkTarget;
 
   public ConsentFormCheckBox() {
-    super(Boolean.class);
+    super(ResolvableType.forClass(Boolean.class));
   }
 
   public Content getLinkTarget() {

@@ -18,6 +18,7 @@ package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.CheckBoxesGroupValidator;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import org.springframework.core.ResolvableType;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +32,7 @@ import static java.util.Optional.ofNullable;
 public class CheckBoxesGroup extends AbstractFormElement<List<String>, CheckBoxesGroupValidator> implements FieldWithOptions<List<String>> {
 
   public CheckBoxesGroup() {
-    super((Class<List<String>>) (Class<?>) List.class); // Necessary due to type erasure
+    super(ResolvableType.forClassWithGenerics(List.class, String.class));
   }
 
   private List<ComplexValue> checkBoxes;

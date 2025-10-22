@@ -17,6 +17,7 @@
 package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.TextOnlyValidator;
+import org.springframework.core.ResolvableType;
 
 import java.util.Map;
 
@@ -26,7 +27,7 @@ import java.util.Map;
 public class TextOnly extends AbstractFormElement<String, TextOnlyValidator> {
 
   public TextOnly() {
-    super(String.class);
+    super(ResolvableType.forClass(String.class));
   }
 
 

@@ -18,6 +18,7 @@ package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.RadioButtonGroupValidator;
 import edu.umd.cs.findbugs.annotations.NonNull;
+import org.springframework.core.ResolvableType;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +31,7 @@ import static java.util.Optional.ofNullable;
 public class RadioButtonGroup extends AbstractFormElement<String, RadioButtonGroupValidator>  implements FieldWithOptions<String> {
 
   public RadioButtonGroup() {
-    super(String.class);
+    super(ResolvableType.forClass(String.class));
   }
 
   private List<ComplexValue> radioButtons;

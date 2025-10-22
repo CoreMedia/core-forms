@@ -17,6 +17,7 @@
 package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.UsersMailValidator;
+import org.springframework.core.ResolvableType;
 import org.springframework.util.MultiValueMap;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class UsersMail extends AbstractFormElement<UsersMail.UsersMailData, User
   private CopyBoxOption copyBoxOption;
 
   public UsersMail() {
-    super(UsersMailData.class);
+    super(ResolvableType.forClass(UsersMailData.class));
   }
 
 

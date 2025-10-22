@@ -19,6 +19,7 @@ package com.tallence.formeditor.elements;
 import com.tallence.formeditor.validator.ValidationFieldError;
 import com.tallence.formeditor.validator.Validator;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.ResolvableType;
 import org.springframework.util.MultiValueMap;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,9 +42,9 @@ public abstract class AbstractFormElement<T, V extends Validator<T>> implements 
   private T value;
   private V validator;
   private AdvancedSettings settings;
-  private final Class<T> type;
+  private final ResolvableType type;
 
-  public AbstractFormElement(Class<T> type) {
+  public AbstractFormElement(ResolvableType type) {
     this.type = type;
   }
 
@@ -169,7 +170,7 @@ public abstract class AbstractFormElement<T, V extends Validator<T>> implements 
   }
 
   @Override
-  public Class<T> getType() {
+  public ResolvableType getType() {
     return this.type;
   }
 

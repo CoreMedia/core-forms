@@ -17,6 +17,7 @@
 package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.NumberValidator;
+import org.springframework.core.ResolvableType;
 
 /**
  * Model bean for a configured NumberField.
@@ -24,7 +25,7 @@ import com.tallence.formeditor.validator.NumberValidator;
 public class NumberField extends AbstractFormElement<String, NumberValidator> {
 
   public NumberField() {
-    super(String.class);
+    super(ResolvableType.forClass(String.class));
   }
 
 }

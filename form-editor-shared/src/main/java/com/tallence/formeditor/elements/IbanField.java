@@ -17,6 +17,7 @@
 package com.tallence.formeditor.elements;
 
 import com.tallence.formeditor.validator.IbanFieldValidator;
+import org.springframework.core.ResolvableType;
 
 /**
  * Model bean for a configured IbanField.
@@ -25,7 +26,7 @@ import com.tallence.formeditor.validator.IbanFieldValidator;
 public class IbanField extends AbstractFormElement<String, IbanFieldValidator> {
 
   public IbanField() {
-    super(String.class);
+    super(ResolvableType.forClass(String.class));
   }
 
 }

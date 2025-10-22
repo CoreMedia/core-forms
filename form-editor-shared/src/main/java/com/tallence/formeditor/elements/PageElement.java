@@ -3,9 +3,11 @@ package com.tallence.formeditor.elements;
 import com.coremedia.xml.Markup;
 import com.tallence.formeditor.validator.PageElementValidator;
 import com.tallence.formeditor.validator.ValidationFieldError;
+import org.springframework.core.ResolvableType;
 import org.springframework.util.MultiValueMap;
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +16,7 @@ import java.util.Optional;
 /**
  * Ordering formElement, which is used to structure formFields in Pages. Cannot have a value.
  */
-public class PageElement extends AbstractFormElement<List, PageElementValidator> implements OrderingElement {
+public class PageElement extends AbstractFormElement<List<FormElement<Object>>, PageElementValidator> implements OrderingElement {
 
   private Markup pageDescription;
   private PageType pageType;
@@ -23,10 +25,8 @@ public class PageElement extends AbstractFormElement<List, PageElementValidator>
 
 
   public PageElement() {
-    super(List.class);
+    super(ResolvableType.forClassWithGenerics(List.class, FormElement.class));
   }
-
-
 
   @Override
   public List<ValidationFieldError> getValidationResult() {
