@@ -40,10 +40,14 @@ type AbstractFormElement implements FormElement{
 
 interface PageElement @inherit(from: ["FormElement"]) {
   formElements: [FormElement]
+  pageType: String
+  description: RichText
 }
 
 type PageElementImpl implements PageElement @inherit(from: ["AbstractFormElement"]) {
-    formElements: [FormElement]
+  formElements: [FormElement] @fetch(from: "#this.getSubElements()")
+  pageType: String
+  description: RichText @fetch(from: "pageDescription")
 }
 
 interface IbanField @inherit(from: ["FormElement"]) {
