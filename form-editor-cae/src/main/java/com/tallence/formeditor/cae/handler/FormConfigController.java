@@ -112,7 +112,7 @@ public class FormConfigController {
    * @return JSON String
    */
   @ResponseBody
-  @GetMapping(value = FORM_EDITOR_CONFIG_URL, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  @GetMapping(value = FORM_EDITOR_CONFIG_URL, produces = MediaType.APPLICATION_JSON_VALUE)
   public String getFormConfig(@PathVariable CMChannel currentContext,
                               @PathVariable FormEditor editor,
                               HttpServletRequest request, HttpServletResponse response) throws Exception {

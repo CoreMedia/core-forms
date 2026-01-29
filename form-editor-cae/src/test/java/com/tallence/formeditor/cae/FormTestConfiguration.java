@@ -42,7 +42,7 @@ import com.tallence.formeditor.cae.handler.ReCaptchaServiceImpl;
 import com.tallence.formeditor.parser.AbstractFormElementParser;
 import com.tallence.formeditor.cae.serializer.FormElementSerializerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
+import org.springframework.boot.webmvc.autoconfigure.WebMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;

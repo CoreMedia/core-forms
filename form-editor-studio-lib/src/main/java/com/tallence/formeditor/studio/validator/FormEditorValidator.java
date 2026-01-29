@@ -18,6 +18,7 @@ package com.tallence.formeditor.studio.validator;
 
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.multisite.SitesService;
+import com.coremedia.rest.cap.validation.AbstractContentTypeValidator;
 import com.coremedia.rest.cap.validation.ContentTypeValidatorBase;
 import com.coremedia.rest.validation.Issues;
 import com.coremedia.rest.validation.Severity;
@@ -39,7 +40,7 @@ import static com.tallence.formeditor.elements.PageElement.PageType.SUMMARY_PAGE
 /**
  * Validates, that a form with form action "mailAction" does not have a fileUpload-field and has a mail-address entered.
  */
-public class FormEditorValidator extends ContentTypeValidatorBase {
+public class FormEditorValidator extends AbstractContentTypeValidator {
 
   private final ThreadLocal<Locale> localeThreadLocal;
   private final FormElementFactory formElementFactory;
