@@ -6,12 +6,10 @@
     "@coremedia-blueprint/studio-client.form-editor": "workspace:*"
   },
   "devDependencies": {
-    "@jangaroo/build": "catalog:",
-
-    "@jangaroo/core": "catalog:",
     "@coremedia/studio-client.ext.eslint-config": "catalog:",
+    "@jangaroo/build": "catalog:",
+    "@jangaroo/core": "catalog:",
     "eslint": "catalog:",
-
     "rimraf": "catalog:"
   },
   "scripts": {
@@ -19,7 +17,7 @@
     "build": "jangaroo build",
     "watch": "jangaroo watch",
     "publish": "jangaroo publish dist",
-    "lint": "eslint --fix \"src/**/*.ts\""
+    "lint": "eslint"
   },
   "coremedia": {
     "projectExtensionFor": "studio-client.workflow"
