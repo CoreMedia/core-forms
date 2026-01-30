@@ -16,17 +16,17 @@
 
 package com.tallence.formeditor.studio.validator;
 
+import com.coremedia.cap.common.CapConnection;
 import com.coremedia.cap.content.Content;
+import com.coremedia.cap.content.ContentType;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.rest.cap.validation.AbstractContentTypeValidator;
-import com.coremedia.rest.cap.validation.ContentTypeValidatorBase;
 import com.coremedia.rest.validation.Issues;
 import com.coremedia.rest.validation.Severity;
 import com.tallence.formeditor.FormEditorHelper;
 import com.tallence.formeditor.FormElementFactory;
 import com.tallence.formeditor.elements.FormElement;
 import com.tallence.formeditor.elements.PageElement;
-import com.tallence.formeditor.parser.CurrentFormSupplier;
 import com.tallence.formeditor.studio.validator.field.ComplexValidator;
 import com.tallence.formeditor.studio.validator.field.FieldValidator;
 import org.springframework.util.StringUtils;
@@ -48,8 +48,9 @@ public class FormEditorValidator extends AbstractContentTypeValidator {
   private final List<FieldValidator> fieldValidators;
   private final List<ComplexValidator> complexValidators;
 
-  public FormEditorValidator(ThreadLocal<Locale> localeThreadLocal, FormElementFactory formElementFactory, SitesService sitesService,
+  public FormEditorValidator(ContentType contentType, boolean isValidatingSubtypes, ThreadLocal<Locale> localeThreadLocal, FormElementFactory formElementFactory, SitesService sitesService,
                              List<FieldValidator> fieldValidators, List<ComplexValidator> complexValidators) {
+    super(contentType, isValidatingSubtypes);
     this.localeThreadLocal = localeThreadLocal;
     this.formElementFactory = formElementFactory;
     this.sitesService = sitesService;
@@ -63,7 +64,7 @@ public class FormEditorValidator extends AbstractContentTypeValidator {
   @Override
   public void validate(Content content, Issues issues) {
 
-    // removed the this, since CurrentFormSupplier needs to access the request context, which does not exist in Studio.
+    // removed this, since CurrentFormSupplier needs to access the request context, which does not exist in Studio.
     //CurrentFormSupplier.setCurrentForm(content);
 
     String action = content.getString(formActionProperty);
