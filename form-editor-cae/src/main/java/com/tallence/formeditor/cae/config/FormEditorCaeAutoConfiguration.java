@@ -12,10 +12,12 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.freemarker.autoconfigure.FreeMarkerVariablesCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 
 import java.util.Map;
 
@@ -32,6 +34,7 @@ import java.util.Map;
 @EnableConfigurationProperties({
         FormEditorCaeConfigurationProperties.class
 })
+@PropertySource("classpath:META-INF/coremedia/form-editor.properties")
 public class FormEditorCaeAutoConfiguration {
 
   @Bean
@@ -58,16 +61,9 @@ public class FormEditorCaeAutoConfiguration {
     return new FormFreemarkerFacade(formElementFactory, reCaptchaService, currentContextService);
   }
 
-  @Customize("freemarkerSharedVariables")
-  @Bean(autowireCandidate = false)
-  public Map<String, FormFreemarkerFacade> formFreemarkerSharedVariablesCustomizer(@NonNull FormFreemarkerFacade formFreemarkerFacade) {
-    return Map.of("formFreemarkerFacade", formFreemarkerFacade);
-  }
-
-  @Customize("freemarkerConfigurer.autoImports")
-  @Bean(autowireCandidate = false)
-  public Map<String, String> formFreemarkerConfigurerAutoImportsCustomizer() {
-    return Map.of("form", "/lib/form/form.ftl");
+  @Bean
+  FreeMarkerVariablesCustomizer formFreemarkerSharedVariablesCustomizer(@NonNull FormFreemarkerFacade formFreemarkerFacade) {
+    return variables -> variables.put("formFreemarkerFacade", formFreemarkerFacade);
   }
 
 }
