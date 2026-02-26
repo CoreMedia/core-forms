@@ -31,7 +31,6 @@ import org.springframework.context.annotation.PropertySource;
 @EnableConfigurationProperties({
         FormEditorCaeConfigurationProperties.class
 })
-@PropertySource("classpath:META-INF/coremedia/form-editor.properties")
 public class FormEditorCaeAutoConfiguration {
 
   @Bean
