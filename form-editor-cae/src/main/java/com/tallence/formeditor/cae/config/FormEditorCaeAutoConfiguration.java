@@ -1,7 +1,6 @@
 package com.tallence.formeditor.cae.config;
 
 import com.coremedia.blueprint.common.services.context.CurrentContextService;
-import com.coremedia.springframework.customizer.Customize;
 import com.coremedia.springframework.xml.ResourceAwareXmlBeanDefinitionReader;
 import com.tallence.formeditor.FormEditorConfiguration;
 import com.tallence.formeditor.FormElementFactory;
@@ -9,7 +8,7 @@ import com.tallence.formeditor.cae.FormFreemarkerFacade;
 import com.tallence.formeditor.cae.handler.ReCaptchaService;
 import com.tallence.formeditor.cae.handler.ReCaptchaServiceImpl;
 import edu.umd.cs.findbugs.annotations.NonNull;
-import org.springframework.beans.factory.annotation.Value;
+import freemarker.template.Configuration;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.freemarker.autoconfigure.FreeMarkerVariablesCustomizer;
@@ -18,8 +17,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
-
-import java.util.Map;
 
 @AutoConfiguration
 @ComponentScan(basePackages = {
@@ -64,6 +61,17 @@ public class FormEditorCaeAutoConfiguration {
   @Bean
   FreeMarkerVariablesCustomizer formFreemarkerSharedVariablesCustomizer(@NonNull FormFreemarkerFacade formFreemarkerFacade) {
     return variables -> variables.put("formFreemarkerFacade", formFreemarkerFacade);
+  }
+
+  /**
+   * Add an auto-import for the FORM namespace in Freemarker templates.
+   * @param configuration Freemarker configuration
+   * @return
+   */
+  @Bean
+  public Object formFreemarkerAutoImport(Configuration configuration) {
+    configuration.addAutoImport("form", "lib/form/form.ftl");
+    return new Object(); // side-effect bean
   }
 
 }
