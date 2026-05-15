@@ -8,6 +8,7 @@ interface FormEditorDocTypes_properties {
   FormEditor_spamProtectionEnabled_displayName: string;
   FormEditor_spamProtectionEnabled_true_displayName: string;
   FormEditor_spamProtectionEnabled_group_displayName: string;
+  FormEditor_showAfterSubmit_displayName: string;
 }
 
 const FormEditorDocTypes_properties: FormEditorDocTypes_properties = {
@@ -20,6 +21,7 @@ const FormEditorDocTypes_properties: FormEditorDocTypes_properties = {
   FormEditor_spamProtectionEnabled_displayName: "activate spam protection",
   FormEditor_spamProtectionEnabled_true_displayName: "activate spam protection",
   FormEditor_spamProtectionEnabled_group_displayName: "Spam protection",
+  FormEditor_showAfterSubmit_displayName: "Show after form submit"
 };
 
 export default FormEditorDocTypes_properties;

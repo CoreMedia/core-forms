@@ -91,6 +91,8 @@ import DisplayField from "@jangaroo/ext-ts/form/field/Display";
 import DisplayFieldSkin from "@coremedia/studio-client.ext.ui-components/skins/DisplayFieldSkin";
 import MessageBoxUtil from "@coremedia/studio-client.ext.ui-components/messagebox/MessageBoxUtil";
 import FormUtils from "../FormUtils";
+import LinkListPropertyField
+  from "@coremedia/studio-client.main.editor-components/sdk/premular/fields/LinkListPropertyField";
 
 interface FormEditorFormConfig extends Config<DocumentTabPanel> {
 }
@@ -248,9 +250,15 @@ class FormEditorForm extends DocumentTabPanel {
                   }),
                 }),
                 Config(StringPropertyField, {propertyName: "adminMails"}),
+
+                Config(LinkListPropertyField, {
+                  linkType: "CMTeasable",
+                  showThumbnails: true,
+                  propertyName: "localSettings.form.showAfterSubmit",
+                  maxCardinality: 1
+                })
               ],
             }),
-
           ],
         }),
         Config(FormEditorDocumentForm, {
