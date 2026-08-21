@@ -146,20 +146,48 @@ class FormEditorForm extends DocumentTabPanel {
     super((() => ConfigUtils.apply(Config(FormEditorForm, {
 
       items: [
-        Config(DocumentForm, {
-          title: FormEditor_properties.FormEditor_tab_content_title,
-          items: [
-            Config(DetailsDocumentForm, {bindTo: config.bindTo}),
-
-            Config(TeaserDocumentForm, {
-              bindTo: config.bindTo,
-              collapsed: true,
+        Config(FormEditorDocumentForm, {
+          itemId: "formEditorFormItemsTab",
+          bindTo: config.bindTo,
+          forceReadOnlyValueExpression: config.forceReadOnlyValueExpression,
+          structPropertyName: FormsStudioPlugin.FORM_ELEMENTS_STRUCT_PROPERTY,
+          formElements: [
+            Config(NumberFieldEditor),
+            Config(TextAreaEditor),
+            Config(TextFieldEditor),
+            Config(TextFieldEditor, {
+              formElementType: "ZipField",
+              defaultRegexpValidatorValue: "\\d{5}",
+              formElementIconCls: SvgIconUtil.getIconStyleClassForSvgIcon(InputCity),
+              defaultMandatory: true,
+              defaultName: FormEditor_properties.FormEditor_label_element_zipField,
             }),
-            Config(MediaDocumentForm, {bindTo: config.bindTo}),
-            Config(RelatedDocumentForm, {bindTo: config.bindTo}),
-            Config(ViewTypeSelectorForm, {bindTo: config.bindTo}),
-            Config(ExternallyVisibleDateForm, {bindTo: config.bindTo}),
-            Config(ValidityDocumentForm, {bindTo: config.bindTo}),
+            Config(TextFieldEditor, {
+              formElementType: "PhoneField",
+              formElementIconCls: SvgIconUtil.getIconStyleClassForSvgIcon(InputPhone),
+              defaultName: FormEditor_properties.FormEditor_label_element_phoneField,
+            }),
+            Config(TextFieldEditor, {
+              formElementType: "FaxField",
+              formElementIconCls: SvgIconUtil.getIconStyleClassForSvgIcon(InputFax),
+              defaultName: FormEditor_properties.FormEditor_label_element_faxField,
+            }),
+            Config(TextFieldEditor, {
+              formElementType: "StreetNumberField",
+              formElementIconCls: SvgIconUtil.getIconStyleClassForSvgIcon(InputStreet),
+              defaultMandatory: true,
+              defaultName: FormEditor_properties.FormEditor_label_element_streetNumberField,
+            }),
+            Config(TextOnlyEditor),
+            Config(UsersMailEditor),
+            Config(ConsentFormCheckBoxEditor),
+            Config(FileUploadEditor),
+            Config(SelectBoxEditor),
+            Config(CheckBoxesEditor),
+            Config(RadioButtonsEditor),
+            Config(DateFieldEditor),
+            Config(IbanFieldEditor),
+            Config(HiddenFieldEditor),
           ],
         }),
         Config(DocumentForm, {
@@ -261,47 +289,22 @@ class FormEditorForm extends DocumentTabPanel {
             }),
           ],
         }),
-        Config(FormEditorDocumentForm, {
-          bindTo: config.bindTo,
-          forceReadOnlyValueExpression: config.forceReadOnlyValueExpression,
-          structPropertyName: FormsStudioPlugin.FORM_ELEMENTS_STRUCT_PROPERTY,
-          formElements: [
-            Config(NumberFieldEditor),
-            Config(TextAreaEditor),
-            Config(TextFieldEditor),
-            Config(TextFieldEditor, {
-              formElementType: "ZipField",
-              defaultRegexpValidatorValue: "\\d{5}",
-              formElementIconCls: SvgIconUtil.getIconStyleClassForSvgIcon(InputCity),
-              defaultMandatory: true,
-              defaultName: FormEditor_properties.FormEditor_label_element_zipField,
+
+        Config(DocumentForm, {
+          title: FormEditor_properties.FormEditor_tab_content_title,
+          itemId: "formEditorFormContentTab",
+          items: [
+            Config(DetailsDocumentForm, {bindTo: config.bindTo}),
+
+            Config(TeaserDocumentForm, {
+              bindTo: config.bindTo,
+              collapsed: true,
             }),
-            Config(TextFieldEditor, {
-              formElementType: "PhoneField",
-              formElementIconCls: SvgIconUtil.getIconStyleClassForSvgIcon(InputPhone),
-              defaultName: FormEditor_properties.FormEditor_label_element_phoneField,
-            }),
-            Config(TextFieldEditor, {
-              formElementType: "FaxField",
-              formElementIconCls: SvgIconUtil.getIconStyleClassForSvgIcon(InputFax),
-              defaultName: FormEditor_properties.FormEditor_label_element_faxField,
-            }),
-            Config(TextFieldEditor, {
-              formElementType: "StreetNumberField",
-              formElementIconCls: SvgIconUtil.getIconStyleClassForSvgIcon(InputStreet),
-              defaultMandatory: true,
-              defaultName: FormEditor_properties.FormEditor_label_element_streetNumberField,
-            }),
-            Config(TextOnlyEditor),
-            Config(UsersMailEditor),
-            Config(ConsentFormCheckBoxEditor),
-            Config(FileUploadEditor),
-            Config(SelectBoxEditor),
-            Config(CheckBoxesEditor),
-            Config(RadioButtonsEditor),
-            Config(DateFieldEditor),
-            Config(IbanFieldEditor),
-            Config(HiddenFieldEditor),
+            Config(MediaDocumentForm, {bindTo: config.bindTo}),
+            Config(RelatedDocumentForm, {bindTo: config.bindTo}),
+            Config(ViewTypeSelectorForm, {bindTo: config.bindTo}),
+            Config(ExternallyVisibleDateForm, {bindTo: config.bindTo}),
+            Config(ValidityDocumentForm, {bindTo: config.bindTo}),
           ],
         }),
         Config(MultiLanguageDocumentForm, {bindTo: config.bindTo}),
