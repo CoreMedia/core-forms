@@ -80,7 +80,7 @@ public abstract class AbstractFormElement<T, V extends Validator<T>> implements 
 
     if (values == null || values.isEmpty()) {
       setValue(null);
-    } else if (getType().equals(List.class)) {
+    } else if (List.class.equals(getType().getRawClass())) {
       setValue((T) values);
     } else if (values.size() == 1) {
       setValue((T) values.get(0));
