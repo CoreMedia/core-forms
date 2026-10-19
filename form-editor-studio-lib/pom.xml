@@ -33,66 +33,66 @@
 
   <dependencies>
 
-    <!-- Project -->
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>form-editor-contentbeans-api</artifactId>
-      <version>${project.version}</version>
-      <!-- scope "provided" because only the string constants are used -->
-      <scope>provided</scope>
-    </dependency>
+    <!-- PROJECT dependencies -->
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>form-editor-shared</artifactId>
       <version>${project.version}</version>
     </dependency>
 
-    <!-- CoreMedia -->
+    <!-- COREMEDIA dependencies -->
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>middle.coremedia-validation</artifactId>
     </dependency>
+
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>middle.cap-validation</artifactId>
     </dependency>
+
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>cap-unified-api</artifactId>
     </dependency>
+
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>cap-multisite</artifactId>
     </dependency>
 
-    <!-- Spring -->
+
+    <!-- THIRD-PARTY dependencies -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
       <!-- used for compiling and testing. It's not directly used, but required for the access to org.springframework.beans.factory.InitializingBean  -->
       <scope>provided</scope>
     </dependency>
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-core</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
     </dependency>
 
-    <!-- Other -->
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
 
-    <!-- Testing -->
+
+    <!-- TEST scope -->
     <dependency>
       <groupId>com.coremedia.cms</groupId>
       <artifactId>coremedia-spring</artifactId>
