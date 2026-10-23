@@ -7,6 +7,7 @@ import com.coremedia.cap.content.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -40,6 +41,15 @@ class FormTranslatablePredicateTest {
   @Test
   void stringValueIsTranslatable() {
     assertTrue(predicate.isTranslatable(valuePath(descriptor("name", CapPropertyDescriptorType.STRING))));
+    assertTrue(predicate.isTranslatable(valuePath(descriptor("hint", CapPropertyDescriptorType.STRING))));
+  }
+
+  @Test
+  void stringGroupElementsValueIsTranslatable() {
+    List<CapPropertyDescriptor> fields = new ArrayList();
+    fields.add(descriptor("groupElements", CapPropertyDescriptorType.STRUCT));
+    fields.add(descriptor("50 und älter", CapPropertyDescriptorType.STRUCT));
+    assertTrue(predicate.isTranslatable(valuePath(fields)));
   }
 
   private List<CapPropertyDescriptor> valuePath(CapPropertyDescriptor value) {
@@ -47,6 +57,14 @@ class FormTranslatablePredicateTest {
       descriptor("formElements", CapPropertyDescriptorType.STRUCT),
       descriptor("1192266228", CapPropertyDescriptorType.STRUCT),
       value);
+  }
+
+  private List<CapPropertyDescriptor> valuePath(List<CapPropertyDescriptor> value) {
+    List<CapPropertyDescriptor> formElements = new ArrayList<>(List.of(formdata,
+      descriptor("formElements", CapPropertyDescriptorType.STRUCT),
+      descriptor("1192266228", CapPropertyDescriptorType.STRUCT)));
+    formElements.addAll(value);
+    return formElements;
   }
 
 }
