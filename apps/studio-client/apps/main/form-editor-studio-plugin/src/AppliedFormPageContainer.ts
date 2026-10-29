@@ -19,12 +19,11 @@ class AppliedFormPageContainer extends AppliedFormPageContainerBase {
     super((() => ConfigUtils.apply(Config(AppliedFormPageContainer, {
 
       items: [
-        /* We need to overwrite the collapsedCls. Otherwise the header would have a transparent background.  */
         Config(StateFulCollapsiblePanel, {
-          margin: "10 15 0 10",
+          margin: "0",
           collapsible: false,
           itemId: AppliedFormPageContainerBase.FORM_ELEMENT_PANEL,
-          collapsedCls: "collapsed-form-element",
+          componentCls: "form-page-properties-panel",
           animCollapse: false,
           title: FormEditor_properties.FormEditor_pages_properties_title,
           plugins: [

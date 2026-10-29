@@ -81,14 +81,12 @@ import IbanFieldEditor from "../elements/IbanFieldEditor";
 import FormsStudioPlugin from "../FormsStudioPlugin";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
 import ContentPropertyNames from "@coremedia/studio-client.cap-rest-client/content/ContentPropertyNames";
-import IconButton from "@coremedia/studio-client.ext.ui-components/components/IconButton";
-import {bind} from "@jangaroo/runtime";
 import CoreIcons_properties from "@coremedia/studio-client.core-icons/CoreIcons_properties";
-import Container from "@jangaroo/ext-ts/container/Container";
-import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
-import BindVisibilityPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindVisibilityPlugin";
-import DisplayField from "@jangaroo/ext-ts/form/field/Display";
-import DisplayFieldSkin from "@coremedia/studio-client.ext.ui-components/skins/DisplayFieldSkin";
+import Button from "@jangaroo/ext-ts/button/Button";
+import SegmentedButton from "@jangaroo/ext-ts/button/Segmented";
+import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
+import BindDisablePlugin
+  from "@coremedia/studio-client.main.editor-components/sdk/premular/fields/plugins/BindDisablePlugin";
 import MessageBoxUtil from "@coremedia/studio-client.ext.ui-components/messagebox/MessageBoxUtil";
 import FormUtils from "../FormUtils";
 import LinkListPropertyField
@@ -106,6 +104,10 @@ class FormEditorForm extends DocumentTabPanel {
     {
       id: "default",
       value: FormEditor_properties.FormEditor_actions_default,
+    },
+    {
+      id: "crm",
+      value: FormEditor_properties.FormEditor_actions_crm,
     },
     {
       id: "mailAction",
@@ -138,13 +140,24 @@ class FormEditorForm extends DocumentTabPanel {
     });
   }
 
-  showActivateButton(setting: number): boolean {
-    return !setting || setting == 0;
+  #beforePageModeToggle(pressed: boolean, mode: number): boolean {
+    const currentMode = this.bindTo.extendBy(ContentPropertyNames.PROPERTIES, FormsStudioPlugin.PAGEABLE_ENABLED).getValue() ? 1 : 0;
+    if (!pressed || mode === currentMode) {
+      return true;
+    }
+
+    if (mode === 1) {
+      this.activatePageableForms();
+    } else {
+      this.deActivatePageableForms();
+    }
+    // The content binding updates the selection only after migration is confirmed.
+    return false;
   }
 
   constructor(config: Config<FormEditorForm> = null) {
     super((() => ConfigUtils.apply(Config(FormEditorForm, {
-
+      componentCls: "form-editor-form",
       items: [
         Config(FormEditorDocumentForm, {
           itemId: "formEditorFormItemsTab",
@@ -207,49 +220,44 @@ class FormEditorForm extends DocumentTabPanel {
               title: FormContentTypes_properties.FormEditor_pageableFormEnabled_group_text,
               collapsed: false,
               itemId: "pageableFormGroup",
+              layout: Config(VBoxLayout, {
+                align: "begin",
+              }),
               items: [
-                Config(Container, {
-                  layout: Config(HBoxLayout),
+                Config(SegmentedButton, {
+                  shrinkWrap: true,
+                  allowMultiple: false,
+                  allowDepress: false,
                   items: [
-                    Config(IconButton, {
-                      iconCls: CoreIcons_properties.type_object,
-                      tooltip: FormEditor_properties.FormEditor_pages_mode_single,
-                      handler: bind(this, this.deActivatePageableForms),
+                    Config(Button, {
+                      iconCls: FormEditor_properties.FormEditor_pages_mode_single_icon,
+                      text: FormEditor_properties.FormEditor_pages_mode_single_text,
+                      tooltip: FormEditor_properties.FormEditor_pages_mode_single_tooltip,
+                      listeners: {
+                        beforetoggle: (button: Button, pressed: boolean): boolean => this.#beforePageModeToggle(pressed, 0),
+                      },
                     }),
-                    Config(DisplayField, {
-                      value: FormEditor_properties.FormEditor_pages_mode_single,
-                      ui: DisplayFieldSkin.ITALIC.getSkin(),
+                    Config(Button, {
+                      iconCls: FormEditor_properties.FormEditor_pages_mode_multi_icon,
+                      text: FormEditor_properties.FormEditor_pages_mode_multi_text,
+                      tooltip: FormEditor_properties.FormEditor_pages_mode_multi_tooltip,
+                      listeners: {
+                        beforetoggle: (button: Button, pressed: boolean): boolean => this.#beforePageModeToggle(pressed, 1),
+                      },
                     }),
                   ],
-                  ...ConfigUtils.append({
-                    plugins: [
-                      Config(BindVisibilityPlugin, {
-                        bindTo: config.bindTo.extendBy(ContentPropertyNames.PROPERTIES, FormsStudioPlugin.PAGEABLE_ENABLED),
-                      }),
-                    ]
-                  })
-                }),
-                Config(Container, {
-                  layout: Config(HBoxLayout),
-                  items: [
-                    Config(IconButton, {
-                      iconCls: CoreIcons_properties.copy,
-                      tooltip: FormEditor_properties.FormEditor_pages_mode_multi,
-                      handler: bind(this, this.activatePageableForms),
+                  plugins: [
+                    Config(BindPropertyPlugin, {
+                      bindTo: config.bindTo.extendBy(ContentPropertyNames.PROPERTIES, FormsStudioPlugin.PAGEABLE_ENABLED),
+                      componentProperty: "value",
+                      bidirectional: false,
+                      transformer: (setting: number): number => setting ? 1 : 0,
                     }),
-                    Config(DisplayField, {
-                      value: FormEditor_properties.FormEditor_pages_mode_multi,
-                      ui: DisplayFieldSkin.ITALIC.getSkin(),
+                    Config(BindDisablePlugin, {
+                      bindTo: config.bindTo,
+                      forceReadOnlyValueExpression: config.forceReadOnlyValueExpression,
                     }),
                   ],
-                  ...ConfigUtils.append({
-                    plugins: [
-                      Config(BindVisibilityPlugin, {
-                        bindTo: config.bindTo.extendBy(ContentPropertyNames.PROPERTIES, FormsStudioPlugin.PAGEABLE_ENABLED),
-                        transformer: this.showActivateButton
-                      }),
-                    ]
-                  })
                 }),
               ],
             }),

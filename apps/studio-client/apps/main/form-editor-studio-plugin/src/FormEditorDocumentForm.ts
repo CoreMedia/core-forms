@@ -86,7 +86,7 @@ class FormEditorDocumentForm extends FormEditorDocumentFormBase {
         title: FormEditor_properties.FormEditor_tab_formFields_title,
         layout: "card",
         region: "center",
-
+        componentCls: "form-editor-document-form",
         items: [
           Config(Container, {
             items: [

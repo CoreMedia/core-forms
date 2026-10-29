@@ -22,13 +22,13 @@ import FormElementsManager from "../helper/FormElementsManager";
 import AppliedElementsContainer from "../AppliedElementsContainer";
 import FormElementStructWrapper from "../model/FormElementStructWrapper";
 import BindPropertyPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindPropertyPlugin";
-import Container from "@jangaroo/ext-ts/container/Container";
 import AppliedFormPageContainer from "../AppliedFormPageContainer";
-import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import {bind} from "@jangaroo/runtime";
 import IconButton from "@coremedia/studio-client.ext.ui-components/components/IconButton";
 import CoreIcons_properties from "@coremedia/studio-client.core-icons/CoreIcons_properties";
 import FormEditor_properties from "../bundles/FormEditor_properties";
+import Toolbar from "@jangaroo/ext-ts/toolbar/Toolbar";
+import ToolbarSkin from "@coremedia/studio-client.ext.ui-components/skins/ToolbarSkin";
 
 
 interface FormPageTabConfig extends Config<Panel>, Partial<Pick<FormPageTab,
@@ -124,46 +124,49 @@ class FormPageTab extends Panel {
         })
       ],
       dockedItems: [
-        Config(Container, {
+        Config(Toolbar, {
+          dock: "top",
+          ui: ToolbarSkin.REGULAR.getSkin(),
+          componentCls: "form-page-tab-toolbar",
           items: [
-            Config(Container, {
-              layout: Config(HBoxLayout),
-              items: [
-                Config(IconButton, {
-                  iconCls: CoreIcons_properties.add,
-                  tooltip: FormEditor_properties.FormEditor_page_tab_insertBefore_text,
-                  handler: bind(this, this.addPageBefore)
-                }),
-                Config(IconButton, {
-                  iconCls: CoreIcons_properties.arrow_left,
-                  tooltip: FormEditor_properties.FormEditor_page_tab_moveDown_text,
-                  handler: bind(this, this.movePageDown)
-                }),
-                Config(IconButton, {
-                  iconCls: CoreIcons_properties.remove,
-                  tooltip: FormEditor_properties.FormEditor_page_tab_delete_text,
-                  handler: bind(this, this.removePage)
-                }),
-                Config(IconButton, {
-                  iconCls: CoreIcons_properties.arrow_right,
-                  tooltip: FormEditor_properties.FormEditor_page_tab_moveUp_text,
-                  handler: bind(this, this.movePageUp)
-                }),
-                Config(IconButton, {
-                  iconCls: CoreIcons_properties.add,
-                  tooltip: FormEditor_properties.FormEditor_page_tab_insertAfter_text,
-                  handler: bind(this, this.addPage)
-                })
-              ]
+            Config(IconButton, {
+              iconCls: FormEditor_properties.FormEditor_page_tab_insertBefore_icon,
+              tooltip: FormEditor_properties.FormEditor_page_tab_insertBefore_text,
+              handler: bind(this, this.addPageBefore),
+              scale: "small",
             }),
-            Config(AppliedFormPageContainer, {
-              bindTo: config.bindTo,
-              formElement: config.page,
-              forceReadOnlyValueExpression: config.forceReadOnlyValueExpression,
-              formElementsManager: config.formElementsManager,
+            Config(IconButton, {
+              iconCls: FormEditor_properties.FormEditor_page_tab_moveDown_icon,
+              tooltip: FormEditor_properties.FormEditor_page_tab_moveDown_text,
+              handler: bind(this, this.movePageDown),
+              scale: "small",
             }),
+            Config(IconButton, {
+              iconCls: FormEditor_properties.FormEditor_page_tab_delete_icon,
+              tooltip: FormEditor_properties.FormEditor_page_tab_delete_text,
+              handler: bind(this, this.removePage),
+              scale: "small",
+            }),
+            Config(IconButton, {
+              iconCls: FormEditor_properties.FormEditor_page_tab_moveUp_icon,
+              tooltip: FormEditor_properties.FormEditor_page_tab_moveUp_text,
+              handler: bind(this, this.movePageUp),
+              scale: "small",
+            }),
+            Config(IconButton, {
+              iconCls: FormEditor_properties.FormEditor_page_tab_insertAfter_icon,
+              tooltip: FormEditor_properties.FormEditor_page_tab_insertAfter_text,
+              handler: bind(this, this.addPage),
+              scale: "small",
+            })
           ]
-        })
+        }),
+        Config(AppliedFormPageContainer, {
+          bindTo: config.bindTo,
+          formElement: config.page,
+          forceReadOnlyValueExpression: config.forceReadOnlyValueExpression,
+          formElementsManager: config.formElementsManager,
+        }),
       ],
       items: [
         Config(AppliedElementsContainer, {

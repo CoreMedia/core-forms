@@ -25,6 +25,8 @@ import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/Va
 import FormElementStructWrapper from "../model/FormElementStructWrapper";
 import BindComponentsPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindComponentsPlugin";
 import PageElementEditor from "../elements/PageElementEditor";
+import TabBarSkin from "@coremedia/studio-client.ext.ui-components/skins/TabBarSkin";
+import TabBar from "@jangaroo/ext-ts/tab/Bar";
 
 interface PagesWrapperContainerConfig extends Config<TabPanel>, Partial<Pick<PagesWrapperContainer,
         "bindTo" |
@@ -70,7 +72,10 @@ class PagesWrapperContainer extends TabPanel {
 
   constructor(config: Config<PagesWrapperContainer> = null) {
     super((() => ConfigUtils.apply(Config(PagesWrapperContainer, {
-      bodyPadding: 20,
+      bodyPadding: 0,
+      tabBar: Config(TabBar, {
+        ui: TabBarSkin.BUTTON_DARK.getSkin(),
+      }),
       plugins: [
         Config(BEMPlugin, {
           block: "form-page-container",

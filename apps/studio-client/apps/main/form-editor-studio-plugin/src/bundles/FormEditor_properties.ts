@@ -1,3 +1,11 @@
+import SvgIconUtil from "@coremedia/studio-client.base-models/util/SvgIconUtil";
+import singlePageModeIcon from "../icons/single-page-mode.svg"
+import multiPageModeIcon from "../icons/multi-page-mode.svg"
+import pageMoveLeftIcon from "../icons/page-move-left.svg"
+import pageMoveRightIcon from "../icons/page-move-right.svg"
+import pageAddLeftIcon from "../icons/page-add-left.svg"
+import pageAddRightIcon from "../icons/page-add-right.svg"
+import pageDeleteIcon from "../icons/page-delete.svg"
 
 /**
  * Interface values for ResourceBundle "FormEditor".
@@ -44,6 +52,7 @@ interface FormEditor_properties {
   FormEditor_help_title: string;
   FormEditor_window_html_content_key: string;
   FormEditor_actions_default: string;
+  FormEditor_actions_crm: string;
   FormEditor_actions_mail: string;
   FormEditor_usersMail_mailType_label: string;
   FormEditor_usersMail_mailType_checkbox: string;
@@ -113,8 +122,12 @@ interface FormEditor_properties {
   FormEditor_advancedSettings_tabs_layout_columnWidth_emptyText: string;
   FormEditor_advancedSettings_tabs_layout_breakAfter_fieldLabel: string;
   FormEditor_advancedSettings_tabs_layout_description: string;
-  FormEditor_pages_mode_single: string,
-  FormEditor_pages_mode_multi: string,
+  FormEditor_pages_mode_single_text: string,
+  FormEditor_pages_mode_single_tooltip: string;
+  FormEditor_pages_mode_single_icon: string,
+  FormEditor_pages_mode_multi_text: string,
+  FormEditor_pages_mode_multi_tooltip: string,
+  FormEditor_pages_mode_multi_icon: string,
   FormEditor_pages_mode_switch_title: string,
   FormEditor_pages_mode_switch_text_multi: string,
   FormEditor_pages_mode_switch_text_single: string,
@@ -128,10 +141,15 @@ interface FormEditor_properties {
   FormEditor_page_title_field_label: string;
   FormEditor_page_title_empty_text: string;
   FormEditor_page_tab_moveUp_text: string;
+  FormEditor_page_tab_moveUp_icon: string;
   FormEditor_page_tab_moveDown_text: string;
+  FormEditor_page_tab_moveDown_icon: string;
   FormEditor_page_tab_delete_text: string;
+  FormEditor_page_tab_delete_icon: string;
   FormEditor_page_tab_insertBefore_text: string;
+  FormEditor_page_tab_insertBefore_icon: string;
   FormEditor_page_tab_insertAfter_text: string;
+  FormEditor_page_tab_insertAfter_icon: string;
 }
 
 /**
@@ -178,6 +196,7 @@ const FormEditor_properties: FormEditor_properties = {
   FormEditor_help_title: "Help with form elements",
   FormEditor_window_html_content_key: "formEditor-help-en",
   FormEditor_actions_default: "Store data in database",
+  FormEditor_actions_crm: "Store data in CRM",
   FormEditor_actions_mail: "Send data via e-mail",
   FormEditor_usersMail_mailType_label: "E-mail sending",
   FormEditor_usersMail_mailType_checkbox: "Let the user decide using the check box",
@@ -247,8 +266,12 @@ const FormEditor_properties: FormEditor_properties = {
   FormEditor_advancedSettings_tabs_layout_columnWidth_emptyText: "Please enter a custom column width.",
   FormEditor_advancedSettings_tabs_layout_breakAfter_fieldLabel: "Break after this element.",
   FormEditor_advancedSettings_tabs_layout_description: "This setting can be used to modify the layout of the form element.",
-  FormEditor_pages_mode_single: "Switch to the single page mode",
-  FormEditor_pages_mode_multi: "Switch to the multi page mode",
+  FormEditor_pages_mode_single_text: "Single-Page Mode",
+  FormEditor_pages_mode_single_tooltip: "Switch to the single-page mode",
+  FormEditor_pages_mode_single_icon: SvgIconUtil.getIconStyleClassForSvgIcon(singlePageModeIcon),
+  FormEditor_pages_mode_multi_text: "Multi-Page Mode",
+  FormEditor_pages_mode_multi_tooltip: "Switch to the multi-page mode",
+  FormEditor_pages_mode_multi_icon: SvgIconUtil.getIconStyleClassForSvgIcon(multiPageModeIcon),
   FormEditor_pages_mode_switch_title: "Page mode",
   FormEditor_pages_mode_switch_text_multi: "Activate the Multi-Page-Mode and move the current form fields into the first page.",
   FormEditor_pages_mode_switch_text_single: "Activate the Single-Page-Mode and move all form fields into the single page.",
@@ -262,10 +285,15 @@ const FormEditor_properties: FormEditor_properties = {
   FormEditor_page_title_field_label: "Page title",
   FormEditor_page_title_empty_text: "Enter page title",
   FormEditor_page_tab_moveUp_text: "Move the current Page to the right",
+  FormEditor_page_tab_moveUp_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageMoveLeftIcon),
   FormEditor_page_tab_moveDown_text: "Move the current Page to the left",
+  FormEditor_page_tab_moveDown_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageMoveRightIcon),
   FormEditor_page_tab_delete_text: "Delete the current page",
+  FormEditor_page_tab_delete_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageDeleteIcon),
   FormEditor_page_tab_insertBefore_text: "Insert a new page on the left",
+  FormEditor_page_tab_insertBefore_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageAddLeftIcon),
   FormEditor_page_tab_insertAfter_text: "Insert a new page on the right",
+  FormEditor_page_tab_insertAfter_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageAddRightIcon),
 };
 
 export default FormEditor_properties;

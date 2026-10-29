@@ -18,6 +18,7 @@ import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpr
 import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import FormEditorFieldBase from "./FormEditorFieldBase";
+import Labelable from "@jangaroo/ext-ts/form/Labelable";
 
 interface FormEditorFieldConfig extends Config<FormEditorFieldBase>, Partial<Pick<FormEditorField,
   "formElementStructVE" |
@@ -129,7 +130,12 @@ class FormEditorField extends FormEditorFieldBase {
   }
 
   constructor(config: Config<FormEditorField> = null) {
-    super(ConfigUtils.apply(Config(FormEditorField, { margin: "10 0 0 0" }), config));
+    super(ConfigUtils.apply(Config(FormEditorField, {
+      margin: "10 0 0 0",
+      defaults: Config<Labelable>({
+        labelWidth: 150,
+      }),
+    }), config));
   }
 }
 
