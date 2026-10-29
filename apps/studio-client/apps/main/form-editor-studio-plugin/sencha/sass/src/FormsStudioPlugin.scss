@@ -14,6 +14,60 @@
   $options-header-block: "core-forms-options-header";
   $options-header-block-selected: $options-header-block + "--selected";
 
+  .form-editor-form {
+    .x-segmented-button {
+      background-color: #e1e3e4;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      border-radius: 8px;
+      padding: 0;
+
+      .x-segmented-button-item {
+        background-color: transparent;
+        background-image: none;
+        border: 0;
+        border-radius: 0;
+        margin: 0;
+        padding: 6px 12px;
+        color: #3f3f3f;
+
+        &.x-segmented-button-first {
+          border-top-left-radius: 6px;
+          border-bottom-left-radius: 6px;
+        }
+
+        &.x-segmented-button-last {
+          border-top-right-radius: 6px;
+          border-bottom-right-radius: 6px;
+        }
+
+        .x-btn-inner,
+        .x-btn-icon-el {
+          color: inherit;
+        }
+
+        &:hover:not(.x-btn-disabled) {
+          background-color: #F7F9FB;
+        }
+
+        &.x-btn-pressed,
+        &.x-btn-pressed:hover {
+          background-color: #ffffff;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+
+        &.x-btn-focus {
+          outline: 2px solid #4089dd;
+          outline-offset: -2px;
+        }
+      }
+    }
+  }
+
+  .form-editor-document-form {
+    .x-panel-header-card-200-top {
+      padding: 6px;
+    }
+  }
 
   .#{$_group_container} {
     border-top: 1px solid;
@@ -25,17 +79,118 @@
   .#{$form_element_block} {
     margin: 10px 15px 0 10px;
     background: rgba(244, 244, 244, 0.2);
-    border: 2px solid rgba(0, 0, 0, 0.04);
+    border: 2px dashed rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
     padding: 6px;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
+    opacity: .75;
   }
 
   .#{$form_page_block} {
     margin: 10px 15px 0 10px;
-    background: transparent;
+    background: #ffffff;
     border: 2px solid rgba(0, 0, 0, 0.04);
+    border-radius: 14px;
     padding: 6px;
     color: rgba(0, 0, 0, 0.27);
+
+    .#{$form_element_block} {
+      color: #3f3f3f;
+    }
+
+    .x-panel-card-200 {
+      background: rgba(244, 244, 244, 0.2);
+      border: 2px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .x-tab-bar {
+      background-color: #F7F9FB;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      padding: 5px;
+
+      .x-tab {
+        min-width: 30px;
+
+        .x-tab-wrap {
+          width: 100%;
+        }
+
+        .x-tab-button {
+          display: flex;
+          width: 100%;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .x-tab-inner {
+          text-align: center;
+        }
+      }
+
+      .x-tab.x-tab-active.x-tab-default {
+        background-color: #F7F9FB;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .x-tab-bar-body {
+        background-color: #e1e3e4;
+        border-radius: 8px;
+      }
+    }
+
+    .form-page-tab-toolbar {
+      background-color: #F7F9FB;
+      position: relative;
+      border-bottom: none !important;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 5px;
+        right: 5px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        pointer-events: none;
+      }
+    }
+
+    .form-page-properties-panel {
+      background-color: #F7F9FB;
+      margin: 0;
+      border-radius: 0 0 10px 10px;
+      border-width: 0;
+
+      .x-panel-header {
+        height: 0;
+        display: none;
+      }
+
+      .x-panel-card-200.x-panel.cm-collapsible-expanded .x-panel-header {
+        background-color: transparent;
+      }
+
+      .x-panel-card-200.x-panel-header-card-200 {
+        border-radius: 0;
+      }
+
+      .x-panel-card-200 {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
+      .x-panel-header-card-200-top {
+        background-color: transparent;
+        padding: 10px 10px 0 10px;
+      }
+
+      .x-panel-body-card-200 {
+        background-color: transparent;
+        padding: 0 10px 20px 10px;
+      }
+
+    }
   }
 
   .#{$form_element_drag_active} {
@@ -93,6 +248,13 @@
       .x-panel-header-title-default {
         font-weight: bold !important;
       }
+    }
+  }
+
+  .form-field-advanced-settings {
+    .x-panel-header-card-200-collapsed .x-panel-header-title,
+    .x-panel-header-card-200-collapsed .x-tool-tool-el {
+      color: #3f3f3f;
     }
   }
 

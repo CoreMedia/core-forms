@@ -28,6 +28,7 @@ import FormEditor_properties from "./bundles/FormEditor_properties";
 import StateFulCollapsiblePanel from "./components/StateFulCollapsiblePanel";
 import FormElementDropContainer from "./dragdrop/FormElementDropContainer";
 import ShowFormIssuesPlugin from "./plugins/ShowFormIssuesPlugin";
+import Labelable from "@jangaroo/ext-ts/form/Labelable";
 
 interface AppliedFormElementContainerConfig extends Config<AppliedFormElementsContainerBase> {
 }
@@ -76,6 +77,9 @@ class AppliedFormElementContainer extends AppliedFormElementsContainerBase {
             /* The form element editor is added dynamically bye the
         {@link com.coremedia.ui.util.IReusableComponentsService}  */
           ],
+          defaults: Config<Labelable>({
+            labelWidth: 150,
+          }),
           header:
         /*Using focusableContainer(cm9-17 style) and enableFocusableContainer(cm9-18 style) to be compatible with all cm9-versions*/
         Config(PanelHeader, {
