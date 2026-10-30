@@ -54,6 +54,7 @@ interface FormEditor_properties {
   FormEditor_actions_default: string;
   FormEditor_actions_crm: string;
   FormEditor_actions_mail: string;
+  FormEditor_actions_webhook: string;
   FormEditor_usersMail_mailType_label: string;
   FormEditor_usersMail_mailType_checkbox: string;
   FormEditor_usersMail_mailType_always: string;
@@ -198,6 +199,7 @@ const FormEditor_properties: FormEditor_properties = {
   FormEditor_actions_default: "Store data in database",
   FormEditor_actions_crm: "Store data in CRM",
   FormEditor_actions_mail: "Send data via e-mail",
+  FormEditor_actions_webhook: "Send data via webhook",
   FormEditor_usersMail_mailType_label: "E-mail sending",
   FormEditor_usersMail_mailType_checkbox: "Let the user decide using the check box",
   FormEditor_usersMail_mailType_always: "Always send User-Mail",
@@ -285,9 +287,9 @@ const FormEditor_properties: FormEditor_properties = {
   FormEditor_page_title_field_label: "Page title",
   FormEditor_page_title_empty_text: "Enter page title",
   FormEditor_page_tab_moveUp_text: "Move the current Page to the right",
-  FormEditor_page_tab_moveUp_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageMoveLeftIcon),
+  FormEditor_page_tab_moveUp_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageMoveRightIcon),
   FormEditor_page_tab_moveDown_text: "Move the current Page to the left",
-  FormEditor_page_tab_moveDown_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageMoveRightIcon),
+  FormEditor_page_tab_moveDown_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageMoveLeftIcon),
   FormEditor_page_tab_delete_text: "Delete the current page",
   FormEditor_page_tab_delete_icon: SvgIconUtil.getIconStyleClassForSvgIcon(pageDeleteIcon),
   FormEditor_page_tab_insertBefore_text: "Insert a new page on the left",

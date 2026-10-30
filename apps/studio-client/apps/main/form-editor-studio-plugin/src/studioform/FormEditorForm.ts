@@ -41,6 +41,7 @@ import MetaDataDocumentForm
 import SvgIconUtil from "@coremedia/studio-client.base-models/util/SvgIconUtil";
 import LocalComboBox from "@coremedia/studio-client.ext.ui-components/components/LocalComboBox";
 import BindPropertyPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindPropertyPlugin";
+import BindVisibilityPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindVisibilityPlugin";
 import DocumentForm from "@coremedia/studio-client.main.editor-components/sdk/premular/DocumentForm";
 import DocumentInfo from "@coremedia/studio-client.main.editor-components/sdk/premular/DocumentInfo";
 import DocumentMetaDataFormDispatcher
@@ -81,7 +82,6 @@ import IbanFieldEditor from "../elements/IbanFieldEditor";
 import FormsStudioPlugin from "../FormsStudioPlugin";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
 import ContentPropertyNames from "@coremedia/studio-client.cap-rest-client/content/ContentPropertyNames";
-import CoreIcons_properties from "@coremedia/studio-client.core-icons/CoreIcons_properties";
 import Button from "@jangaroo/ext-ts/button/Button";
 import SegmentedButton from "@jangaroo/ext-ts/button/Segmented";
 import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
@@ -91,6 +91,7 @@ import MessageBoxUtil from "@coremedia/studio-client.ext.ui-components/messagebo
 import FormUtils from "../FormUtils";
 import LinkListPropertyField
   from "@coremedia/studio-client.main.editor-components/sdk/premular/fields/LinkListPropertyField";
+import Spacer from "@jangaroo/ext-ts/toolbar/Spacer";
 
 interface FormEditorFormConfig extends Config<DocumentTabPanel> {
 }
@@ -110,10 +111,16 @@ class FormEditorForm extends DocumentTabPanel {
       value: FormEditor_properties.FormEditor_actions_crm,
     },
     {
-      id: "mailAction",
+      id: "mail",
       value: FormEditor_properties.FormEditor_actions_mail,
     },
+    {
+      id: "webhook",
+      value: FormEditor_properties.FormEditor_actions_webhook,
+    }
   ];
+
+  static readonly WEBHOOK_URL_FIELD_ID: string = "webhookUrlField";
 
   activatePageableForms(): void {
     let self = this.bindTo;
@@ -286,7 +293,33 @@ class FormEditorForm extends DocumentTabPanel {
                     data: FormEditorForm.#FORM_ACTIONS,
                   }),
                 }),
-                Config(StringPropertyField, {propertyName: "adminMails"}),
+
+                Config(StringPropertyField, {
+                  itemId: FormEditorForm.WEBHOOK_URL_FIELD_ID,
+                  propertyName: "localSettings.form.actions.webhookUrl",
+                  ...ConfigUtils.append({
+                    plugins: [
+                      Config(BindVisibilityPlugin, {
+                        bindTo: config.bindTo.extendBy("properties", "formAction"),
+                        transformer: (formAction: string): boolean => formAction === "webhook",
+                      }),
+                    ],
+                  }),
+                }),
+
+                Config(StringPropertyField, {
+                  propertyName: "adminMails",
+                  ...ConfigUtils.append({
+                    plugins: [
+                      Config(BindVisibilityPlugin, {
+                        bindTo: config.bindTo.extendBy("properties", "formAction"),
+                        transformer: (formAction: string): boolean => formAction === "mail",
+                      }),
+                    ],
+                  }),
+                }),
+
+                Config(Spacer, {height: 20}),
 
                 Config(LinkListPropertyField, {
                   linkType: "CMTeasable",

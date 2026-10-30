@@ -18,6 +18,14 @@ contentTypeLocalizationRegistry.addLocalization("FormEditor", {
       properties: {
         form: {
           properties: {
+            actions: {
+              properties: {
+                webhookUrl: {
+                  displayName: "Webhook URL",
+                  emptyText: "Enter Webhook URL here."
+                }
+              }
+            },
             showAfterSubmit: { displayName: "Show after form submit" }
           }
         }
